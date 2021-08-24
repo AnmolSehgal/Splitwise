@@ -6,11 +6,16 @@ import {
   signInAuthSuccess,
 } from "../actions/signInAction";
 import actionTypes from "../actionTypes";
+import history from "../history";
 
-function* signInAuthSaga({ payload }: ReturnType<typeof signInAuthRequest>) {
+function* signInAuthSaga({
+  payload,
+}: ReturnType<typeof signInAuthRequest>): Generator {
   try {
-    yield signInAuth(payload.email, payload.password);
+    const uid = yield signInAuth(payload.email, payload.password);
+    localStorage.setItem("uid", uid as string);
     yield put(signInAuthSuccess());
+    history.push("/dashboard");
   } catch (error) {
     console.log(error);
     yield put(signInAuthFailure());

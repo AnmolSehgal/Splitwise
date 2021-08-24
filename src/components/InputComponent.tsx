@@ -1,5 +1,5 @@
 interface InputComponentProps {
-  label: string;
+  label?: string;
   inputType?: string;
   inputVal: string;
   onChange: (val: string) => void | ((val: number) => void);
@@ -13,7 +13,7 @@ const InputComponent = ({
 }: InputComponentProps) => {
   return (
     <div className="flex flex-col py-2">
-      <label className="text-gray-500">{label}</label>
+      {label ? <label className="text-gray-500">{label}</label> : ""}
       <div className="w-full rounded border px-2 py-1">
         <input
           type={inputType === "password" ? "password" : "text"}

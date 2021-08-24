@@ -7,11 +7,16 @@ import {
   signUpAuthSuccess,
 } from "../actions/signUpAction";
 import actionTypes from "../actionTypes";
+import history from "../history";
 
-function* signUpAuthSaga({ payload }: ReturnType<typeof signUpAuthRequest>) {
+function* signUpAuthSaga({
+  payload,
+}: ReturnType<typeof signUpAuthRequest>): Generator {
   try {
-    yield signUpAuth(payload.email, payload.password, payload.name);
+    const uid = yield signUpAuth(payload.email, payload.password, payload.name);
+    localStorage.setItem("uid", uid as string);
     yield put(signUpAuthSuccess());
+    history.push("/dashboard");
   } catch (error) {
     console.log(error);
     yield put(signUpAuthFailure());
