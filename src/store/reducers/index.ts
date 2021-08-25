@@ -3,8 +3,8 @@ import { combineReducers } from "redux";
 import history from "../history";
 import profileReducer from "./profileReducer";
 
-import signInReducer from "./signInReducer";
-import signUpReducer from "./signUpSaga";
+import signInReducer from "./signInOutReducer";
+import signUpReducer from "./signUpReducer";
 
 export default combineReducers({
   router: connectRouter(history),

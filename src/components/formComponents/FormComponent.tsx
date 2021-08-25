@@ -1,6 +1,6 @@
-import ButtonComponent from "./ButtonComponent";
-import InputComponent from "./InputComponent";
-import { formType } from "./type";
+import ButtonComponent from "../buttonComponent/ButtonComponent";
+import InputComponent from "../inputComponent/InputComponent";
+import { formType } from "../type";
 
 interface InputComponentProps {
   type: string;
@@ -28,8 +28,8 @@ const FormComponent = ({
   onClick,
 }: InputComponentProps) => {
   return (
-    <div className="flex flex-col justify-center items-center my-6">
-      <div className="flex flex-col p-3 w-2/5  border rounded">
+    <div className="flex flex-col justify-center items-center my-6 ">
+      <div className="flex flex-col p-3 w-2/5  border rounded shadow-md">
         <div className="text-3xl mb-3 border-b py-1">
           {type === formType.signIn ? "SignIn" : "Sign Up"}
         </div>
@@ -59,11 +59,13 @@ const FormComponent = ({
         ) : (
           ""
         )}
-        <ButtonComponent
-          btnLabel="Submit"
-          className="bg-secondary-600 text-white my-3 w-full rounded"
-          onClick={onClick}
-        />
+        <div className="flex flex-row justify-center">
+          <ButtonComponent
+            btnLabel="Submit"
+            className="bg-secondary-600 text-white my-3 w-32 h-10 rounded hover:bg-secondary-700"
+            onClick={onClick}
+          />
+        </div>
       </div>
     </div>
   );

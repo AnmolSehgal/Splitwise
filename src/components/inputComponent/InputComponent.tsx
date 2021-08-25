@@ -14,10 +14,10 @@ const InputComponent = ({
   return (
     <div className="flex flex-col py-2">
       {label ? <label className="text-gray-500">{label}</label> : ""}
-      <div className="w-full rounded border px-2 py-1">
+      <div className="w-full rounded border px-2 py-1 shadow-sm">
         <input
           type={inputType === "password" ? "password" : "text"}
-          className="w-full outline-none"
+          className="w-full outline-none "
           value={inputVal}
           placeholder={`${label}`}
           onChange={(event) => {

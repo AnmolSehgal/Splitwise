@@ -34,7 +34,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      boxShadow: ["active"],
+      padding: ["hover"],
+    },
   },
   plugins: [],
 };

@@ -1,5 +1,6 @@
 export interface LoginState {
   loginFailed: boolean;
+  isLoggedIn: boolean;
 }
 
 export interface SignUpState {

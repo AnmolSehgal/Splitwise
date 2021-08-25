@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import FormComponent from "../components/FormComponent";
+import FormComponent from "../components/formComponents/FormComponent";
 import { formType } from "../components/type";
 import { signInAuthRequest } from "../store/actions/signInAction";
 

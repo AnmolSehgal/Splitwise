@@ -1,18 +1,16 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 
-import actionTypes from "../actionTypes";
+import actionTypes from "../actionTypes/actionTypes";
 import { ProfileStateObject } from "../types";
-import { userSignOut } from "../../services/firebase/authentication";
+import { userSignOut } from "../../services/firebase/auth/authentication";
 
-import {
-  fetchUserProfile,
-  updateProfile,
-} from "../../services/firebase/authentication";
+import { updateProfile } from "../../services/firebase/auth/authentication";
 import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
 } from "../actions/profileActions";
 import history from "../history";
+import { signOutFailure, signOutSuccess } from "../actions/signOut";
 
 function* updateProfileInfoSaga({
   payload,
@@ -25,25 +23,19 @@ function* updateProfileInfoSaga({
   }
 }
 
-function* fetchProfileInfoSaga(): Generator {
-  try {
-    yield fetchUserProfile();
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 function* signOutSaga(): Generator {
   try {
     yield userSignOut();
+    yield put(signOutSuccess());
     localStorage.removeItem("uid");
     history.push("/SignIn");
-  } catch (error) {}
+  } catch (error) {
+    yield put(signOutFailure());
+  }
 }
 
 const profileSaga = [
   takeLatest(actionTypes.UPDATE_USER_INFO_REQUEST, updateProfileInfoSaga),
-  takeLatest(actionTypes.USER_PROFILE_REQUEST, fetchProfileInfoSaga),
   takeLatest(actionTypes.SIGN_OUT_REQUEST, signOutSaga),
 ];
 export default profileSaga;

@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { BsX, BsCheck } from "react-icons/bs";
 
-import InputComponent from "../../components/InputComponent";
-import ProfileEditComponent from "../../components/ProfileComponents/ProfileEditComponent";
-import DisplayComponent from "../../components/ProfileComponents/DisplayComponent";
-import ButtonComponent from "../../components/ButtonComponent";
+import InputComponent from "../../components/inputComponent/InputComponent";
+import ProfileEditComponent from "../../components/profileComponents/ProfileEditComponent";
+import DisplayComponent from "../../components/profileComponents/DisplayComponent";
+import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
 import { GlobalState, ProfileObject } from "../../store/types";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchUserInfoRequest,
-  updateUserInfoRequest,
-} from "../../store/actions/profileActions";
+import { updateUserInfoRequest } from "../../store/actions/profileActions";
 import { useEffect } from "react";
 
 const Profile = () => {
@@ -22,14 +19,13 @@ const Profile = () => {
   } = useSelector((state: GlobalState) => state.profile);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchUserInfoRequest());
-  }, [dispatch]);
+
   useEffect(() => {
     setName(userName);
     setEmail(userEmail);
     setPhoneNum(phoneNumber);
   }, [userName, userEmail, phoneNumber, userImage]);
+
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phoneNum, setPhoneNum] = useState<string>("");
@@ -42,7 +38,7 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-col p-2 border rounded-lg w-1/2">
+      <div className="flex flex-col p-2 border rounded-lg w-1/2 shadow-md">
         <div className="text-3xl mb-4 py-1 border-b">Profile</div>
         <div className="flex flex-row justify-evenly">
           <div className="flex flex-col mr-6">

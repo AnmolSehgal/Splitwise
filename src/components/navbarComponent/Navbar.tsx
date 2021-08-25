@@ -1,15 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signOutAction } from "../store/actions/profileActions";
-import ButtonComponent from "./ButtonComponent";
+import { signOutRequest } from "../../store/actions/signOut";
+
+import { GlobalState } from "../../store/types";
+import ButtonComponent from "../buttonComponent/ButtonComponent";
 
 const Navbar = () => {
+  const userLogin = useSelector(
+    (state: GlobalState) => state.signIn.isLoggedIn
+  );
+
   const dispatch = useDispatch();
   return (
     <div className="flex flex-row justify-between bg-primary items-center mb-6">
       <div className="text-lg text-white ml-2">Splitwize</div>
       <div className="flex flex-row ">
-        {localStorage.getItem("uid") ? (
+        {userLogin ? (
           ""
         ) : (
           <Link to="/SignIn">
@@ -19,7 +25,7 @@ const Navbar = () => {
             />
           </Link>
         )}
-        {localStorage.getItem("uid") ? (
+        {userLogin ? (
           ""
         ) : (
           <Link to="/SignUp">
@@ -30,7 +36,7 @@ const Navbar = () => {
           </Link>
         )}
 
-        {localStorage.getItem("uid") ? (
+        {userLogin ? (
           <Link to="/profile">
             <ButtonComponent
               className="bg-secondary-600 rounded m-2 px-2 text-white"
@@ -41,12 +47,12 @@ const Navbar = () => {
           ""
         )}
 
-        {localStorage.getItem("uid") ? (
+        {userLogin ? (
           <ButtonComponent
             className="bg-secondary-600 rounded m-2 px-2 text-white"
             btnLabel="Sign Out"
             onClick={() => {
-              dispatch(signOutAction());
+              dispatch(signOutRequest());
             }}
           />
         ) : (

@@ -1,11 +1,11 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
-import { signInAuth } from "../../services/firebase/authentication";
+import { signInAuth } from "../../services/firebase/auth/authentication";
 import {
   signInAuthFailure,
   signInAuthRequest,
   signInAuthSuccess,
 } from "../actions/signInAction";
-import actionTypes from "../actionTypes";
+import actionTypes from "../actionTypes/actionTypes";
 import history from "../history";
 
 function* signInAuthSaga({

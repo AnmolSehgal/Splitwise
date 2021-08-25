@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes";
+import actionTypes from "../actionTypes/actionTypes";
 import { ProfileObject, ProfileStateObject } from "../types";
 
 export const updateUserInfoRequest = ({
@@ -71,11 +71,5 @@ export const fetchUserInfoSuccess = ({
 export const fetchUserInfoFailure = () => {
   return {
     type: actionTypes.USER_PROFILE_FAILURE,
-  };
-};
-
-export const signOutAction = () => {
-  return {
-    type: actionTypes.SIGN_OUT_REQUEST,
   };
 };

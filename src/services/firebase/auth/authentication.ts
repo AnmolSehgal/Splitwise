@@ -1,10 +1,7 @@
 import firebase from "firebase";
 import "firebase/auth";
-import { fetchUserInfoSuccess } from "../../store/actions/profileActions";
-
-import store from "../../store/store";
-import { ProfileObject, ProfileStateObject } from "../../store/types";
-import { uploadImage } from "./storage/storage";
+import { ProfileObject } from "../../../store/types";
+import { uploadImage } from "../storage/storage";
 
 export const signInAuth = async (email: string, password: string) => {
   const data = await firebase
@@ -59,20 +56,6 @@ export const updateProfile = async ({
     };
   }
   return data;
-};
-
-export const fetchUserProfile = async () => {
-  return await firebase.auth().onAuthStateChanged((user) => {
-    if (user !== null) {
-      const userData = {
-        image: user.photoURL,
-        name: user.displayName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-      };
-      store.dispatch(fetchUserInfoSuccess(userData as ProfileStateObject));
-    } else return {};
-  });
 };
 
 export async function userSignOut() {
