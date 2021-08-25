@@ -7,7 +7,7 @@ import {
   signUpAuthSuccess,
 } from "../actions/signUpAction";
 import actionTypes from "../actionTypes/actionTypes";
-import history from "../history";
+import history from "../history/history";
 
 function* signUpAuthSaga({
   payload,

@@ -1,6 +1,6 @@
 import { connectRouter } from "connected-react-router";
 import { combineReducers } from "redux";
-import history from "../history";
+import history from "../history/history";
 import profileReducer from "./profileReducer";
 
 import signInReducer from "./signInOutReducer";

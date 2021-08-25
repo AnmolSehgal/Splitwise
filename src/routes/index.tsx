@@ -3,8 +3,8 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { GlobalState } from "../store/types";
 import Dashboard from "./dashboard/Dashboard";
 import Profile from "./profile/Profile";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "./signIn/SignIn";
+import SignUp from "./signUp/SignUp";
 
 interface RoutesProps {
   path: string;

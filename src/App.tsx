@@ -5,7 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import history from "./store/history";
+import history from "./store/history/history";
 import Navbar from "./components/navbarComponent/Navbar";
 import Routes from "./routes";
 import { GlobalState, ProfileStateObject } from "./store/types";

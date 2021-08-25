@@ -5,7 +5,7 @@ import { routerMiddleware } from "connected-react-router";
 
 import combineReducer from "./reducers";
 import rootSaga from "./saga";
-import history from "./history";
+import history from "./history/history";
 
 const sagaMiddleWare = createSagaMiddleware();
 

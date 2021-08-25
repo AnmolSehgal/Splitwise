@@ -9,7 +9,7 @@ import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
 } from "../actions/profileActions";
-import history from "../history";
+import history from "../history/history";
 import { signOutFailure, signOutSuccess } from "../actions/signOut";
 
 function* updateProfileInfoSaga({
