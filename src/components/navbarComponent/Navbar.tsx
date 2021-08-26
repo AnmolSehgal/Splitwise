@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { signOutRequest } from "../../store/actions/signOut";
 
 import { GlobalState } from "../../store/types";
-import ButtonComponent from "../buttonComponent/ButtonComponent";
+import NavbarButton from "./NavbarButtonComponent";
 
 const Navbar = () => {
   const userLogin = useSelector(
@@ -12,45 +12,37 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   return (
-    <div className="flex flex-row justify-between bg-primary items-center mb-6">
-      <div className="text-lg text-white ml-2">Splitwize</div>
+    <div className="flex flex-row justify-between items-center mb-6 py-2">
+      <div className=" font-mono font-bold text-gray-700 font ml-2 text-3xl">
+        Splitwize
+      </div>
       <div className="flex flex-row ">
         {userLogin ? (
           ""
         ) : (
           <Link to="/SignIn">
-            <ButtonComponent
-              className="bg-secondary-600 rounded m-2 px-2 text-white"
-              btnLabel="Sign in"
-            />
+            <NavbarButton label="Sign In" />
           </Link>
         )}
         {userLogin ? (
           ""
         ) : (
           <Link to="/SignUp">
-            <ButtonComponent
-              className="bg-secondary-600 rounded m-2 px-2 text-white"
-              btnLabel="Sign Up"
-            />
+            <NavbarButton label="Sign Up" />
           </Link>
         )}
 
         {userLogin ? (
           <Link to="/profile">
-            <ButtonComponent
-              className="bg-secondary-600 rounded m-2 px-2 text-white"
-              btnLabel="Profile"
-            />
+            <NavbarButton label="Profile" />
           </Link>
         ) : (
           ""
         )}
 
         {userLogin ? (
-          <ButtonComponent
-            className="bg-secondary-600 rounded m-2 px-2 text-white"
-            btnLabel="Sign Out"
+          <NavbarButton
+            label="Sign out"
             onClick={() => {
               dispatch(signOutRequest());
             }}

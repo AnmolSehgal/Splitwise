@@ -1,6 +1,7 @@
 interface InputComponentProps {
   label?: string;
   inputType?: string;
+  className?: string;
   inputVal: string;
   onChange: (val: string) => void | ((val: number) => void);
 }
@@ -9,10 +10,11 @@ const InputComponent = ({
   label,
   inputType,
   inputVal,
+  className,
   onChange,
 }: InputComponentProps) => {
   return (
-    <div className="flex flex-col py-2">
+    <div className={`flex flex-col min-h-24 ${className ? className : ""}`}>
       {label ? <label className="text-gray-500">{label}</label> : ""}
       <div className="w-full rounded border px-2 py-1 shadow-sm">
         <input

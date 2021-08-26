@@ -115,7 +115,7 @@ const Profile = () => {
             )}
             <ButtonComponent
               btnLabel="Save"
-              className="w-24 h-12 text-white bg-secondary border rounded-md"
+              className="w-24 h-12 text-white bg-froly border rounded-lg"
               onClick={() => {
                 let updateInfo: ProfileObject = {};
                 if (image) updateInfo.image = image;
