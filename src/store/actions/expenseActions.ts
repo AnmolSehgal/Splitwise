@@ -1,38 +1,38 @@
 import actionTypes from "../actionTypes/actionTypes";
 import { v4 as uuid } from "uuid";
-import { PaymentInfo } from "../types";
+import { ExpenseInfo } from "../types";
 
-export interface PaymentDetails {
+export interface expenseDetails {
   title: string;
   description: string;
   totalAmount: number;
   friend: string;
   friendUid?: string;
   friendAmount: number;
-  userAmount: string;
+  userAmount: number;
   paidBy: string;
 }
 
-export const addPaymentRequest = (details: PaymentDetails) => {
+export const addExpenseRequest = (details: expenseDetails) => {
   return {
     type: actionTypes.ADD_PAYMENT_REQUEST,
     payload: {
       ...details,
-      paymentId: "pay#" + uuid(),
+      expenseId: "pay#" + uuid(),
       settleStatus: false,
       date: new Date(),
       settleDate: undefined,
     },
   };
 };
-export const addPaymentSuccess = (details: PaymentInfo) => {
+export const addExpenseSuccess = (details: ExpenseInfo) => {
   return {
     type: actionTypes.ADD_PAYMENT_SUCCESS,
-    payload: { ...details },
+    payload: { details: details },
   };
 };
 
-export const addPaymentFailure = () => {
+export const addExpenseFailure = () => {
   return {
     type: actionTypes.ADD_PAYMENT_FAILURE,
   };

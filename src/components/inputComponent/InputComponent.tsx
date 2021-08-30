@@ -20,7 +20,7 @@ const InputComponent = ({
       ) : (
         ""
       )}
-      <div className="w-full rounded border px-2 py-1 shadow-sm  bg-white">
+      <div className="w-full rounded border px-2 py-1 shadow-sm bg-white">
         <input
           type={inputType === "password" ? "password" : "text"}
           className="w-full outline-none "

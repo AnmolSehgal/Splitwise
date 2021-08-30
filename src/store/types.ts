@@ -29,9 +29,9 @@ export interface GlobalState {
   profile: ProfileStateObject;
 }
 
-export interface PaymentInfo {
+export interface ExpenseInfo {
   settleStatus: boolean;
-  paymentId: string;
+  expenseId: string;
   title: string;
   description: string;
   friend: string;
