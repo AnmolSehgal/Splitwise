@@ -28,3 +28,18 @@ export interface GlobalState {
   signUp: SignUpState;
   profile: ProfileStateObject;
 }
+
+export interface PaymentInfo {
+  settleStatus: boolean;
+  paymentId: string;
+  title: string;
+  description: string;
+  friend: string;
+  friendUid?: string;
+  paidBy: string;
+  userAmount: number;
+  totalAmount: number;
+  friendAmount: number;
+  date: Date;
+  settleDate: Date | undefined;
+}

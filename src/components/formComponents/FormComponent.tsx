@@ -38,7 +38,7 @@ const FormComponent = ({
             className="h-96 m-2"
           />
         </div>
-        <div className="flex flex-col py-3 px-5 w-96 md:w-96 border rounded-xl shadow-md">
+        <div className="flex flex-col py-3 px-5 w-11/12 md:w-96 border rounded-xl shadow-md">
           <div className="flex flex-row justify-center text-3xl mb-3 border-b py-1 w-full min-h-16">
             <span className="text-gray-700">
               {type === formType.signIn ? "SignIn" : "Sign Up"}
