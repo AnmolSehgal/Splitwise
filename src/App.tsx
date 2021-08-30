@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import history from "./store/history/history";
 import Navbar from "./components/navbarComponent/Navbar";
 import Routes from "./routes";
+
+import bgImage from "./icons/background/backgroundImage.svg";
+
 import { GlobalState, ProfileStateObject } from "./store/types";
 import { fetchUserInfoSuccess } from "./store/actions/profileActions";
 import { signOutRequest } from "./store/actions/signOut";
@@ -15,6 +18,7 @@ import {
   userLoginStatusFailure,
   userLoginStatusSuccess,
 } from "./store/actions/signInAction";
+
 function App() {
   const userLogin = useSelector(
     (state: GlobalState) => state.signIn.isLoggedIn
@@ -41,10 +45,18 @@ function App() {
   }, [dispatch, userLogin]);
 
   return (
-    <ConnectedRouter history={history}>
-      <Navbar />
-      <Routes />
-    </ConnectedRouter>
+    <div
+      className="h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <ConnectedRouter history={history}>
+        <Navbar />
+        <Routes />
+      </ConnectedRouter>
+    </div>
   );
 }
 
