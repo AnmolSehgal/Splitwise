@@ -29,9 +29,15 @@ const expenseReducer = (
     case actionTypes.ADD_PAYMENT_SUCCESS:
       return {
         ...state,
-        expensesList: { ...state.expensesList, ...action.payload.details },
-        isExpense: true,
+        expensesList: [...state.expensesList, action.payload.details],
       };
+    case actionTypes.ADD_PAYMENT_FAILURE:
+      return {
+        ...state,
+        isExpense: false,
+      };
+    default:
+      return { ...state };
   }
 };
 

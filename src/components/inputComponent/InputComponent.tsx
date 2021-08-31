@@ -15,11 +15,7 @@ const InputComponent = ({
 }: InputComponentProps) => {
   return (
     <div className={`flex flex-col min-h-24 ${className ? className : ""}`}>
-      {label ? (
-        <label className="sm:text-gray-700 text-white">{label}</label>
-      ) : (
-        ""
-      )}
+      {label ? <label className="text-gray-700 ">{label}</label> : ""}
       <div className="w-full rounded border px-2 py-1 shadow-sm bg-white">
         <input
           type={inputType === "password" ? "password" : "text"}

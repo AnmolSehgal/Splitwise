@@ -16,7 +16,7 @@ function* signUpAuthSaga({
     const uid = yield signUpAuth(payload.email, payload.password, payload.name);
     localStorage.setItem("uid", uid as string);
     yield put(signUpAuthSuccess());
-    history.push("/dashboard");
+    history.push("user/dashboard");
   } catch (error) {
     console.log(error);
     yield put(signUpAuthFailure());
