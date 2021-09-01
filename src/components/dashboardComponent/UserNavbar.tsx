@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import AddFriendModalComponent from "../modalComponent/AddFriendModalComponent";
 import UserFriendsList from "./UserFriendsList";
 
 const UserNavbar = () => {
+  const [addFriend, setAddFriend] = useState(false);
   return (
-    <div className="flex flex-col text-gray-400 px-3  font-mono">
+    <div className="flex flex-col text-gray-500 px-3  font-mono pt-6 ">
       <Link to="/user/dashBoard">
         <div>Dashboard</div>
       </Link>
@@ -11,8 +14,18 @@ const UserNavbar = () => {
         <div>All Expenses</div>
       </Link>
       <div>
-        <UserFriendsList />
+        <UserFriendsList
+          handleChange={() => {
+            setAddFriend(true);
+          }}
+        />
       </div>
+      <AddFriendModalComponent
+        display={addFriend}
+        handleDisplay={() => {
+          setAddFriend(false);
+        }}
+      />
     </div>
   );
 };
