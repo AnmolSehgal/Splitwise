@@ -6,10 +6,9 @@ export interface ModalComponentState {
 }
 
 const Modal = ({ children, display }: ModalComponentState) => {
-  console.log(display);
   return (
     <div
-      className={` absolute inset-0 opacity-50 z-10 bg-gray-700 flex justify-center items-center ${
+      className={` absolute inset-0 bg-opacity-50 z-10 bg-gray-700 flex justify-center items-center ${
         display ? " " : " hidden"
       }`}
     >

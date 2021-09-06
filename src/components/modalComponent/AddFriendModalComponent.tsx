@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { BsX, BsArrowLeftShort } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addFriendUsingEmailRequest } from "../../store/actions/addFriendAction";
+
 import InputComponent from "../inputComponent/InputComponent";
 import PrimaryButton from "../navbarComponent/PrimaryButtonComponent";
 import Modal from "./Modal";
@@ -16,6 +19,9 @@ const AddFriendModalComponent = ({
   const [mode, setMode] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+
+  const dispatch = useDispatch();
+
   return (
     <Modal display={display}>
       <div className="flex flex-col opacity-100 bg-white w-80 border rounded-xl text-gray-700 p-5">
@@ -53,7 +59,12 @@ const AddFriendModalComponent = ({
                     inputType="email"
                     inputVal={email}
                   />
-                  <PrimaryButton label="Add friend" />
+                  <PrimaryButton
+                    label="Add friend"
+                    onClick={() => {
+                      if (email) dispatch(addFriendUsingEmailRequest(email));
+                    }}
+                  />
                 </div>
               );
             case "name":

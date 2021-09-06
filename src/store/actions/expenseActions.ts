@@ -37,3 +37,12 @@ export const addExpenseFailure = () => {
     type: actionTypes.ADD_PAYMENT_FAILURE,
   };
 };
+
+export const checkUserRequest = (email: string) => {
+  return {
+    type: actionTypes.CHECK_USER_REQUEST,
+    payload: {
+      email: email,
+    },
+  };
+};

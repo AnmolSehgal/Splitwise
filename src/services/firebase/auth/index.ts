@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import "firebase/auth";
 import { ProfileObject } from "../../../store/types";
+import { settingUpUser } from "../firestore/firestore";
 import { uploadImage } from "../storage/storage";
 
 export const signInAuth = async (email: string, password: string) => {
@@ -21,7 +22,12 @@ export const signUpAuth = async (
   const user = await firebase.auth().currentUser;
   await user?.updateProfile({ displayName: fullName });
   await firebase.auth().currentUser?.displayName;
-  return userLogin.user?.uid;
+  await settingUpUser(email, fullName);
+  return {
+    uid: userLogin.user?.uid,
+    userName: fullName,
+    email: userLogin.user?.email,
+  };
 };
 
 export const updateProfile = async ({

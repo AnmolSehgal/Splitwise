@@ -3,7 +3,7 @@ import firebase from "firebase";
 import "firebase/auth";
 import { ConnectedRouter } from "connected-react-router";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import history from "./store/history/history";
 import Navbar from "./components/navbarComponent/Navbar";
@@ -11,7 +11,7 @@ import Routes from "./routes";
 
 import bgImage from "./icons/background/backgroundImage.svg";
 
-import { GlobalState, ProfileStateObject } from "./store/types";
+import { ProfileStateObject } from "./store/types";
 import { fetchUserInfoSuccess } from "./store/actions/profileActions";
 import { signOutRequest } from "./store/actions/signOut";
 import {
@@ -20,9 +20,9 @@ import {
 } from "./store/actions/signInAction";
 
 function App() {
-  const userLogin = useSelector(
-    (state: GlobalState) => state.signIn.isLoggedIn
-  );
+  // const userLogin = useSelector(
+  //   (state: GlobalState) => state.signIn.isLoggedIn
+  // );
 
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ function App() {
     });
     if (localStorage.getItem("uid")) dispatch(userLoginStatusSuccess());
     else dispatch(userLoginStatusFailure());
-  }, [dispatch, userLogin]);
+  }, [dispatch]);
 
   return (
     <div

@@ -2,9 +2,9 @@ import { takeLatest, put } from "@redux-saga/core/effects";
 
 import actionTypes from "../actionTypes/actionTypes";
 import { ProfileStateObject } from "../types";
-import { userSignOut } from "../../services/firebase/auth/authentication";
+import { userSignOut } from "../../services/firebase/auth";
 
-import { updateProfile } from "../../services/firebase/auth/authentication";
+import { updateProfile } from "../../services/firebase/auth";
 import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
@@ -28,6 +28,8 @@ function* signOutSaga(): Generator {
     yield userSignOut();
     yield put(signOutSuccess());
     localStorage.removeItem("uid");
+    localStorage.removeItem("email");
+    localStorage.removeItem("userName");
     history.push("/SignIn");
   } catch (error) {
     yield put(signOutFailure());
