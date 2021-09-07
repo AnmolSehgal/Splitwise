@@ -24,7 +24,7 @@ export async function addFriendUsingEmail(email: string) {
     await db.doc(localStorage.getItem("email") as string).get()
   ).data()) as UserData;
   const friendData = (await (await db.doc(email).get()).data()) as UserData;
-
+  if (!friendData) throw new Error("Invalid Email");
   if (
     userData.friends.findIndex((data) => {
       return data.email === email;

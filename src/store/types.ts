@@ -9,6 +9,10 @@ export interface SignUpState {
   signUpFailed: boolean;
 }
 
+export interface ErrorState {
+  showError: boolean;
+  errorMessage: string;
+}
 export interface ProfileObject {
   name?: string;
   image?: File | undefined;
@@ -30,6 +34,7 @@ export interface GlobalState {
   signUp: SignUpState;
   profile: ProfileStateObject;
   friends: FriendState;
+  error: ErrorState;
 }
 
 export interface ExpenseInfo {

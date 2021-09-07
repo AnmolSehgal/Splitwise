@@ -4,6 +4,7 @@ import {
   addFriendUsingName,
   getUserFriends,
 } from "../../services/firebase/firestore/firestore";
+import { showErrorRequest } from "../actions/errorsActions";
 import {
   addFriendUsingEmailRequest,
   addFriendUsingEmailSuccess,
@@ -20,7 +21,7 @@ function* addFriendUsingEmailSaga({
     yield put(addFriendUsingEmailSuccess(data));
     yield;
   } catch (error) {
-    console.log(error);
+    yield put(showErrorRequest("Enter a Valid user email"));
   }
 }
 

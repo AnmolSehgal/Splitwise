@@ -19,6 +19,7 @@ import {
   userLoginStatusSuccess,
 } from "./store/actions/signInAction";
 import { getFriendsRequest } from "./store/actions/friendAction";
+import AlertComponent from "./components/alertComponent";
 
 function App() {
   // const userLogin = useSelector(
@@ -59,6 +60,7 @@ function App() {
         <Navbar />
         <Routes />
       </ConnectedRouter>
+      <AlertComponent />
     </div>
   );
 }
