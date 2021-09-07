@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { showErrorRequest } from "../../../store/actions/errorsActions";
 import {
   addFriendUsingEmailRequest,
   addFriendUsingNameRequest,
 } from "../../../store/actions/friendAction";
 import PrimaryButton from "../../navbarComponent/PrimaryButtonComponent";
 import FriendInputComponent from "./FriendInputComponent";
-
+import { regExp } from "../../type";
 interface ModesProps {
   handleModes: (mode: string) => void;
   mode: string;
@@ -31,7 +32,18 @@ const Modes = ({ handleModes, mode }: ModesProps) => {
             inputType="email"
             inputVal={email}
             handleOnClick={() => {
-              if (email) dispatch(addFriendUsingEmailRequest(email));
+              if (
+                regExp.test(email) &&
+                email !== localStorage.getItem("email")
+              ) {
+                dispatch(addFriendUsingEmailRequest(email));
+                setEmail("");
+                handleModes("");
+              } else {
+                dispatch(showErrorRequest("please enter valid email id"));
+                setEmail("");
+                handleModes("");
+              }
             }}
           />
         );
@@ -46,7 +58,15 @@ const Modes = ({ handleModes, mode }: ModesProps) => {
             inputType="text"
             inputVal={name}
             handleOnClick={() => {
-              if (name) dispatch(addFriendUsingNameRequest(name));
+              if (name) {
+                dispatch(addFriendUsingNameRequest(name));
+                setName("");
+                handleModes("");
+              } else {
+                dispatch(showErrorRequest("please enter friend's name"));
+                setName("");
+                handleModes("");
+              }
             }}
           />
         );
