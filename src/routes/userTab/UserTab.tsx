@@ -1,6 +1,6 @@
 import { Redirect, useParams } from "react-router";
 import DashboardComponent from "../../components/dashboardComponent/Dashboard";
-import UserNavbar from "../../components/dashboardComponent/UserNavbar";
+import UserNavbar from "../../components/dashboardComponent/UserSideBar";
 
 export interface UserTabInterface {
   mode: string;

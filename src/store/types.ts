@@ -1,3 +1,5 @@
+import { FriendState } from "./reducers/friendsReducer";
+
 export interface LoginState {
   loginFailed: boolean;
   isLoggedIn: boolean;
@@ -27,6 +29,7 @@ export interface GlobalState {
   signIn: LoginState;
   signUp: SignUpState;
   profile: ProfileStateObject;
+  friends: FriendState;
 }
 
 export interface ExpenseInfo {
