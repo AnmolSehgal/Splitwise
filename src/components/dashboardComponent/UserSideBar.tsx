@@ -8,12 +8,9 @@ const UserNavbar = () => {
   return (
     <div className="flex flex-col text-gray-500 px-3  font-mono pt-6 ">
       <Link to="/user/dashBoard">
-        <div>Dashboard</div>
+        <div className="mb-3">Dashboard</div>
       </Link>
-      <Link to="/user/expense">
-        <div>All Expenses</div>
-      </Link>
-      <div>
+      <div className="mb-3">
         <UserFriendsList
           handleChange={() => {
             setAddFriend(true);

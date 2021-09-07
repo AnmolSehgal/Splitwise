@@ -66,3 +66,10 @@ export async function addFriendUsingName(name: string) {
     await db.doc(localStorage.getItem("email") as string).get()
   ).data()) as UserData;
 }
+
+export async function getUserFriends() {
+  const db = await firebase.firestore().collection("/userDetails");
+  return (await (
+    await db.doc(localStorage.getItem("email") as string).get()
+  ).data()) as UserData;
+}

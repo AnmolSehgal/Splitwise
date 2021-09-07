@@ -18,6 +18,7 @@ import {
   userLoginStatusFailure,
   userLoginStatusSuccess,
 } from "./store/actions/signInAction";
+import { getFriendsRequest } from "./store/actions/friendAction";
 
 function App() {
   // const userLogin = useSelector(
@@ -40,8 +41,10 @@ function App() {
         dispatch(signOutRequest());
       }
     });
-    if (localStorage.getItem("uid")) dispatch(userLoginStatusSuccess());
-    else dispatch(userLoginStatusFailure());
+    if (localStorage.getItem("uid")) {
+      dispatch(userLoginStatusSuccess());
+      dispatch(getFriendsRequest());
+    } else dispatch(userLoginStatusFailure());
   }, [dispatch]);
 
   return (

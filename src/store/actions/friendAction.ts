@@ -46,3 +46,24 @@ export const addFriendUsingNameFailure = () => {
     type: actionTypes.ADD_FRIEND_USING_NAME_FAILURE,
   };
 };
+
+export const getFriendsRequest = () => {
+  return {
+    type: actionTypes.GET_USER_FRIENDS_REQUEST,
+  };
+};
+
+export const getFriendsSuccess = (data: any) => {
+  return {
+    type: actionTypes.GET_USER_FRIENDS_SUCCESS,
+    payload: {
+      friends: data.friends,
+    },
+  };
+};
+
+export const getFriendsFailure = () => {
+  return {
+    type: actionTypes.GET_USER_FRIENDS_FAILURE,
+  };
+};

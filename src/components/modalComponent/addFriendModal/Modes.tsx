@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   addFriendUsingEmailRequest,
   addFriendUsingNameRequest,
-} from "../../../store/actions/addFriendAction";
+} from "../../../store/actions/friendAction";
 import PrimaryButton from "../../navbarComponent/PrimaryButtonComponent";
 import FriendInputComponent from "./FriendInputComponent";
 

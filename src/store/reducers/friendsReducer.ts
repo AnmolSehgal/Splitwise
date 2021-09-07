@@ -5,18 +5,19 @@ import {
   addFriendUsingNameFailure,
   addFriendUsingNameRequest,
   addFriendUsingNameSuccess,
-} from "../actions/addFriendAction";
+  getFriendsFailure,
+  getFriendsRequest,
+  getFriendsSuccess,
+} from "../actions/friendAction";
 import actionTypes from "../actionTypes/actionTypes";
 import { Friend } from "../types";
 
 export interface FriendState {
   friends: Friend[];
-  isExpense: boolean;
 }
 
 const initState: FriendState = {
   friends: [],
-  isExpense: true,
 };
 
 const friendsReducer = (
@@ -28,6 +29,9 @@ const friendsReducer = (
     | ReturnType<typeof addFriendUsingNameRequest>
     | ReturnType<typeof addFriendUsingNameSuccess>
     | ReturnType<typeof addFriendUsingNameFailure>
+    | ReturnType<typeof getFriendsRequest>
+    | ReturnType<typeof getFriendsSuccess>
+    | ReturnType<typeof getFriendsFailure>
 ) => {
   switch (action.type) {
     case actionTypes.ADD_FRIEND_USING_NAME_REQUEST:
@@ -35,7 +39,7 @@ const friendsReducer = (
     case actionTypes.ADD_FRIEND_USING_NAME_SUCCESS:
       return {
         ...state,
-        friend: [action.payload.friends],
+        friends: [...action.payload.friends],
       };
     case actionTypes.ADD_FRIEND_USING_NAME_FAILURE:
       return {
@@ -46,9 +50,20 @@ const friendsReducer = (
     case actionTypes.ADD_FRIEND_EMAIL_SUCCESS:
       return {
         ...state,
-        friend: [action.payload.friends],
+        friends: [...action.payload.friends],
       };
     case actionTypes.ADD_FRIEND_EMAIL_FAILURE:
+      return {
+        ...state,
+      };
+    case actionTypes.GET_USER_FRIENDS_REQUEST:
+      return { ...state };
+    case actionTypes.GET_USER_FRIENDS_SUCCESS:
+      return {
+        ...state,
+        friends: [...action.payload.friends],
+      };
+    case actionTypes.GET_USER_FRIENDS_FAILURE:
       return {
         ...state,
       };
