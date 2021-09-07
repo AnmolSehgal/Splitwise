@@ -1,16 +1,21 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
-import { signInAuth } from "../../services/firebase/authentication";
+import { signInAuth } from "../../services/firebase/auth/authentication";
 import {
   signInAuthFailure,
   signInAuthRequest,
   signInAuthSuccess,
 } from "../actions/signInAction";
-import actionTypes from "../actionTypes";
+import actionTypes from "../actionTypes/actionTypes";
+import history from "../history/history";
 
-function* signInAuthSaga({ payload }: ReturnType<typeof signInAuthRequest>) {
+function* signInAuthSaga({
+  payload,
+}: ReturnType<typeof signInAuthRequest>): Generator {
   try {
-    yield signInAuth(payload.email, payload.password);
+    const uid = yield signInAuth(payload.email, payload.password);
+    localStorage.setItem("uid", uid as string);
     yield put(signInAuthSuccess());
+    history.push("/dashboard");
   } catch (error) {
     console.log(error);
     yield put(signInAuthFailure());

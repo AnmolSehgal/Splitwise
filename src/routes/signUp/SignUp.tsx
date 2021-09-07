@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import FormComponent from "../components/FormComponent";
-import { formType } from "../components/type";
-import { signUpAuthRequest } from "../store/actions/signUpAction";
+import FormComponent from "../../components/formComponents/FormComponent";
+import { formType } from "../../components/type";
+import { signUpAuthRequest } from "../../store/actions/signUpAction";
 
 const SignUp = () => {
   const [name, setName] = useState("");

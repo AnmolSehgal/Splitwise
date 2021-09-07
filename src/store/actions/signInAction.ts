@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes";
+import actionTypes from "../actionTypes/actionTypes";
 
 export const signInAuthRequest = (email: string, password: string) => {
   return {
@@ -19,5 +19,17 @@ export const signInAuthSuccess = () => {
 export const signInAuthFailure = () => {
   return {
     type: actionTypes.LOGIN_AUTH_FAILURE,
+  };
+};
+
+export const userLoginStatusSuccess = () => {
+  return {
+    type: actionTypes.USER_LOGIN_STATUS_SUCCESS,
+  };
+};
+
+export const userLoginStatusFailure = () => {
+  return {
+    type: actionTypes.USER_LOGIN_STATUS_FAILURE,
   };
 };
