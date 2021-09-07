@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
-import { ExpenseInfo } from "../../../store/types";
+import { ExpenseInfo, UserData } from "../../../store/types";
+import { v4 as uuid } from "uuid";
 
 export async function addExpense(paymentDetails: ExpenseInfo) {
   const db = await firebase.firestore().collection("/payments");
@@ -17,21 +18,51 @@ export async function userValid(email: string) {
 }
 
 export async function addFriendUsingEmail(email: string) {
+  const relationId = uuid();
   const db = await firebase.firestore().collection("/userDetails");
-  const userData = await (
+  const userData = (await (
     await db.doc(localStorage.getItem("email") as string).get()
-  ).data();
-  const friendData = await (await db.doc(email).get()).data();
-  await db.doc(localStorage.getItem("email") as string).set({
-    friends: [
-      ...userData?.friends,
-      { userName: friendData?.userName, email: friendData?.email },
-    ],
+  ).data()) as UserData;
+  const friendData = (await (await db.doc(email).get()).data()) as UserData;
+
+  if (
+    userData.friends.findIndex((data) => {
+      return data.email === email;
+    }) < 0
+  ) {
+    await db.doc(localStorage.getItem("email") as string).update({
+      friends: firebase.firestore.FieldValue.arrayUnion({
+        userName: friendData.userName,
+        email: friendData.email,
+        relationId: relationId,
+      }),
+    });
+
+    await db.doc(email).update({
+      friends: firebase.firestore.FieldValue.arrayUnion({
+        userName: userData.userName,
+        email: userData.email,
+        relationId: relationId,
+      }),
+    });
+
+    return (await (
+      await db.doc(localStorage.getItem("email") as string).get()
+    ).data()) as UserData;
+  }
+}
+
+export async function addFriendUsingName(name: string) {
+  const relationId = uuid();
+  const db = await firebase.firestore().collection("/userDetails");
+  await db.doc(localStorage.getItem("email") as string).update({
+    friends: firebase.firestore.FieldValue.arrayUnion({
+      userName: name,
+      email: null,
+      relationId,
+    }),
   });
-  await db.doc(email).set({
-    friends: [
-      ...friendData?.friends,
-      { userName: userData?.userName, email: userData?.email },
-    ],
-  });
+  return (await (
+    await db.doc(localStorage.getItem("email") as string).get()
+  ).data()) as UserData;
 }

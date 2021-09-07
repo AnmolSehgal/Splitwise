@@ -8,23 +8,15 @@ import {
 import actionTypes from "../actionTypes/actionTypes";
 import history from "../history/history";
 
-interface userData {
-  uid: string;
-  userName: string;
-  email: string;
-}
-
 function* signInAuthSaga({
   payload,
 }: ReturnType<typeof signInAuthRequest>): Generator {
   try {
-    const data = (yield signInAuth(
-      payload.email,
-      payload.password
-    )) as userData;
-    localStorage.setItem("uid", data.uid);
-    localStorage.setItem("userName", data.userName);
-    localStorage.setItem("email", data.email);
+    yield signInAuth(payload.email, payload.password).then((data) => {
+      localStorage.setItem("uid", data.uid as string);
+      localStorage.setItem("userName", data.userName as string);
+      localStorage.setItem("email", data.email as string);
+    });
     yield put(signInAuthSuccess());
     history.push("/user/dashboard");
   } catch (error) {

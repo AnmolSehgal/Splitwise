@@ -43,3 +43,15 @@ export interface ExpenseInfo {
   date: Date;
   settleDate: Date | undefined;
 }
+
+export interface UserData {
+  userName: string;
+  email: string;
+  friends: Friend[];
+}
+
+export interface Friend {
+  userName: string;
+  email: string | null;
+  relationId: string;
+}

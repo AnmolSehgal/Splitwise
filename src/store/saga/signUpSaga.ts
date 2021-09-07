@@ -13,10 +13,13 @@ function* signUpAuthSaga({
   payload,
 }: ReturnType<typeof signUpAuthRequest>): Generator {
   try {
-    const uid = yield signUpAuth(payload.email, payload.password, payload.name);
-    localStorage.setItem("uid", uid as string);
-    localStorage.setItem("email", payload.email as string);
-    localStorage.setItem("userName", payload.name);
+    yield signUpAuth(payload.email, payload.password, payload.name).then(
+      (data) => {
+        localStorage.setItem("uid", data.uid as string);
+        localStorage.setItem("userName", data.userName as string);
+        localStorage.setItem("email", data.email as string);
+      }
+    );
     yield put(signUpAuthSuccess());
     history.push("user/dashboard");
   } catch (error) {

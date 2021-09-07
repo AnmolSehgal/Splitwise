@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AddFriendModalComponent from "../modalComponent/AddFriendModalComponent";
+import AddFriendModalComponent from "../modalComponent/addFriendModal";
 import UserFriendsList from "./UserFriendsList";
 
 const UserNavbar = () => {
