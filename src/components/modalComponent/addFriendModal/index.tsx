@@ -37,6 +37,7 @@ const AddFriendModalComponent = ({
           handleModes={(mode: string) => {
             setMode(mode);
           }}
+          handleDispaly={handleDisplay}
           mode={mode}
         />
       </div>

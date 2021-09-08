@@ -26,8 +26,8 @@ export const signUpAuth = async (
     .createUserWithEmailAndPassword(email, password);
   const user = await firebase.auth().currentUser;
   await user?.updateProfile({ displayName: fullName });
-  await firebase.auth().currentUser?.displayName;
-  await settingUpUser(email, fullName);
+  const uid = userLogin.user?.uid;
+  await settingUpUser(uid as string, email, fullName);
   return {
     uid: userLogin.user?.uid,
     userName: fullName,

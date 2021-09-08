@@ -42,17 +42,15 @@ export interface ExpenseInfo {
   expenseId: string;
   title: string;
   description: string;
-  friend: string;
-  friendUid?: string;
-  paidBy: string;
-  userAmount: number;
+  payerId: string;
+  payerAmount: number;
   totalAmount: number;
   friendAmount: number;
-  date: Date;
-  settleDate: Date | undefined;
+  modifiedDate: string;
 }
 
 export interface UserData {
+  uid: string;
   userName: string;
   email: string;
   friends: Friend[];
@@ -60,6 +58,7 @@ export interface UserData {
 
 export interface Friend {
   userName: string;
-  email: string | null;
-  relationId: string;
+  isVerified: boolean;
+  paymentDetails: ExpenseInfo[];
+  friendUID: string;
 }

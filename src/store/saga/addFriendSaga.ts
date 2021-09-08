@@ -19,7 +19,6 @@ function* addFriendUsingEmailSaga({
   try {
     const data = yield addFriendUsingEmail(payload.email);
     yield put(addFriendUsingEmailSuccess(data));
-    yield;
   } catch (error) {
     yield put(showErrorRequest("Enter a Valid user email"));
   }

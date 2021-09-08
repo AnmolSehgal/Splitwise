@@ -7,9 +7,15 @@ export async function addExpense(paymentDetails: ExpenseInfo) {
   await db.doc(paymentDetails.expenseId).set(paymentDetails);
 }
 
-export async function settingUpUser(email: string, userName: string) {
+export async function settingUpUser(
+  uid: string,
+  email: string,
+  userName: string
+) {
   const db = await firebase.firestore().collection("/userDetails");
-  await db.doc(email).set({ email: email, friends: [], userName: userName });
+  await db
+    .doc(uid)
+    .set({ uid: uid, email: email, friends: [], userName: userName });
 }
 
 export async function userValid(email: string) {
@@ -18,58 +24,69 @@ export async function userValid(email: string) {
 }
 
 export async function addFriendUsingEmail(email: string) {
-  const relationId = uuid();
   const db = await firebase.firestore().collection("/userDetails");
   const userData = (await (
-    await db.doc(localStorage.getItem("email") as string).get()
+    await db.doc(localStorage.getItem("uid") as string).get()
   ).data()) as UserData;
-  const friendData = (await (await db.doc(email).get()).data()) as UserData;
-  if (!friendData) throw new Error("Invalid Email");
+
+  const data = await (await db.get()).docs;
+  const friendDoc = await data.filter((doc) => {
+    const data = doc.data();
+    return data.email === email;
+  });
+  if (!friendDoc) throw new Error("Invalid Email");
+  const friendData = (await friendDoc[0].data()) as UserData;
+  console.log(friendData);
   if (
     userData.friends.findIndex((data) => {
-      return data.email === email;
+      return data.friendUID === friendData.uid;
     }) < 0
   ) {
-    await db.doc(localStorage.getItem("email") as string).update({
+    await db.doc(localStorage.getItem("uid") as string).update({
       friends: firebase.firestore.FieldValue.arrayUnion({
         userName: friendData.userName,
-        email: friendData.email,
-        relationId: relationId,
+        paymentDetails: [],
+        isVerified: true,
+        friendUID: friendData.uid,
       }),
     });
-
-    await db.doc(email).update({
+    await db.doc(friendData.uid).update({
       friends: firebase.firestore.FieldValue.arrayUnion({
         userName: userData.userName,
-        email: userData.email,
-        relationId: relationId,
+        paymentDetails: [],
+        isVerified: true,
+        friendUID: localStorage.getItem("uid"),
       }),
     });
-
-    return (await (
-      await db.doc(localStorage.getItem("email") as string).get()
-    ).data()) as UserData;
   }
+
+  //if (
+  //   userData.friends.findIndex((data) => {
+  //     return data.friendUID === friendData.uid;
+  //   }) < 0
+  // )
+  //   throw new Error("UserExist");
 }
 
 export async function addFriendUsingName(name: string) {
-  const relationId = uuid();
+  const uid = uuid();
   const db = await firebase.firestore().collection("/userDetails");
-  await db.doc(localStorage.getItem("email") as string).update({
+  await db.doc(localStorage.getItem("uid") as string).update({
     friends: firebase.firestore.FieldValue.arrayUnion({
       userName: name,
-      email: null,
-      relationId,
+      isVerified: false,
+      paymentDetails: [],
+      friendUID: uid,
     }),
   });
   return (await (
-    await db.doc(localStorage.getItem("email") as string).get()
+    await db.doc(localStorage.getItem("uid") as string).get()
   ).data()) as UserData;
 }
 
 export async function getUserFriends() {
   const db = await firebase.firestore().collection("/userDetails");
   return (await (
-    await db.doc(localStorage.getItem("email") as string).get()
+    await db.doc(localStorage.getItem("uid") as string).get()
   ).data()) as UserData;
 }

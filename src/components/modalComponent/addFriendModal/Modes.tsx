@@ -10,10 +10,11 @@ import FriendInputComponent from "./FriendInputComponent";
 import { regExp } from "../../type";
 interface ModesProps {
   handleModes: (mode: string) => void;
+  handleDispaly: () => void;
   mode: string;
 }
 
-const Modes = ({ handleModes, mode }: ModesProps) => {
+const Modes = ({ handleModes, handleDispaly, mode }: ModesProps) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
@@ -39,10 +40,12 @@ const Modes = ({ handleModes, mode }: ModesProps) => {
                 dispatch(addFriendUsingEmailRequest(email));
                 setEmail("");
                 handleModes("");
+                handleDispaly();
               } else {
                 dispatch(showErrorRequest("please enter valid email id"));
                 setEmail("");
                 handleModes("");
+                handleDispaly();
               }
             }}
           />
@@ -62,10 +65,12 @@ const Modes = ({ handleModes, mode }: ModesProps) => {
                 dispatch(addFriendUsingNameRequest(name));
                 setName("");
                 handleModes("");
+                handleDispaly();
               } else {
                 dispatch(showErrorRequest("please enter friend's name"));
                 setName("");
                 handleModes("");
+                handleDispaly();
               }
             }}
           />
