@@ -1,3 +1,4 @@
+import history from "../../../store/history/history";
 import { Friend } from "../../../store/types";
 
 interface FriendsProps {
@@ -9,7 +10,13 @@ const FriendsList = ({ friends }: FriendsProps) => {
     <div className=" flex flex-col">
       {friends.map(({ userName, friendUID }, index) => {
         return (
-          <div key={index} className="p-2 border-b mx-2">
+          <div
+            key={index}
+            className="p-2 border-b mx-2"
+            onClick={() => {
+              history.push(`/user/friend/${friendUID}`);
+            }}
+          >
             {userName}
           </div>
         );

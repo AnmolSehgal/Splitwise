@@ -1,5 +1,6 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 import { signInAuth } from "../../services/firebase/auth";
+import { getFriendsRequest } from "../actions/friendAction";
 import {
   signInAuthFailure,
   signInAuthRequest,
@@ -18,6 +19,7 @@ function* signInAuthSaga({
       localStorage.setItem("email", data.email as string);
     });
     yield put(signInAuthSuccess());
+    yield put(getFriendsRequest());
     history.push("/user/dashboard");
   } catch (error) {
     console.log(error);

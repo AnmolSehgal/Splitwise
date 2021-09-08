@@ -10,6 +10,7 @@ import {
   addFriendUsingEmailSuccess,
   addFriendUsingNameRequest,
   addFriendUsingNameSuccess,
+  getFriendsSuccess,
 } from "../actions/friendAction";
 import actionTypes from "../actionTypes/actionTypes";
 
@@ -38,7 +39,7 @@ function* addFriendUsingNameSaga({
 function* getUserFriendsSaga(): Generator {
   try {
     const data = yield getUserFriends();
-    yield put(addFriendUsingNameSuccess(data));
+    yield put(getFriendsSuccess(data));
   } catch (error) {
     console.log(error);
   }

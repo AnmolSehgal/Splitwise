@@ -30,9 +30,10 @@ function* checkValidUser({
 }: ReturnType<typeof checkUserRequest>): Generator {
   try {
     console.log("hello from user saga");
-    yield userValid(payload.email);
-  } catch (error: any) {
-    console.log(error.message);
+    const data = yield userValid(payload.email);
+    yield console.log(data);
+  } catch (error) {
+    console.log(error);
   }
 }
 

@@ -1,34 +1,21 @@
 import { useState } from "react";
+import { ExpenseInfo } from "../../../store/types";
 
-export interface ExpenseDisplayProps {
-  settleStatus: boolean;
-  expenseId: string;
-  relationId: string;
-  title: string;
-  friend: string;
-
-  friendEmail?: string;
-  paidBy: string;
-  description: string;
-  payerAmount: number;
-  totalAmount: number;
-  friendAmount: number;
-  modifiedDate: string;
+interface ExpenseDisplayProps {
+  expenseInfo: ExpenseInfo;
+  friendName: string;
 }
 
-const ExpenseDisplay = ({
-  settleStatus,
-  expenseId,
-  relationId,
-  title,
-  friend,
-  paidBy,
-  description,
-  payerAmount,
-  totalAmount,
-  friendAmount,
-  modifiedDate,
-}: ExpenseDisplayProps) => {
+const ExpenseDisplay = ({ expenseInfo, friendName }: ExpenseDisplayProps) => {
+  const {
+    title,
+    description,
+    payerId,
+    payerAmount,
+    totalAmount,
+    friendAmount,
+    modifiedDate,
+  } = expenseInfo;
   const [showDescription, setShowDescription] = useState(false);
   return (
     <div className="">
@@ -47,7 +34,12 @@ const ExpenseDisplay = ({
             </div>
           ) : null}
         </div>
-        <div>{localStorage.get}</div>
+        <div className=" mx-0.5">Total amount: Rs {totalAmount}</div>
+        <div>
+          {localStorage.get("uid") === payerId
+            ? `${friendName} owes you : Rs ${friendAmount}`
+            : `you owes ${friendName} : Rs ${payerAmount}`}
+        </div>
       </div>
       {description && showDescription ? (
         <div className="text-sm">{description}</div>

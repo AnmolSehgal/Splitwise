@@ -1,17 +1,14 @@
+import { Friend } from "../../../store/types";
 import PrimaryButton from "../../navbarComponent/PrimaryButtonComponent";
 
-interface FriendExpenseTabProps {
-  relationId: string;
-  userName: string;
-}
-
-const FriendExpenseTab = ({ relationId, userName }: FriendExpenseTabProps) => {
+const FriendExpenseTab = ({ friendUID, userName }: Friend) => {
   return (
-    <div className="flex flex-col ">
-      <div className="flex flex-row w-full justify-between items-center px-3">
-        <div className=" text-gray-700">{userName}</div>
-        <div>
-          <PrimaryButton label="expense" onClick={() => {}} />
+    <div className="flex flex-col px-2">
+      <div className="flex flex-row w-full justify-between items-center px-2 border-b">
+        <div className=" text-gray-700 text-xl">{userName}</div>
+        <div className="flex flex-row">
+          <PrimaryButton label="Add expense" onClick={() => {}} />
+          <PrimaryButton label="Settle all" onClick={() => {}} />
         </div>
       </div>
     </div>
