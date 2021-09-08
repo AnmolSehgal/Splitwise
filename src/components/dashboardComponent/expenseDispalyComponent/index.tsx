@@ -17,8 +17,9 @@ const ExpenseDisplay = ({ expenseInfo, friendName }: ExpenseDisplayProps) => {
     modifiedDate,
   } = expenseInfo;
   const [showDescription, setShowDescription] = useState(false);
+
   return (
-    <div className="">
+    <div className="flex flex-col w-full">
       <div className="flex flex-row bg-malibu-400 border-b text-gray-700 items-center py-2">
         <div className="">{modifiedDate}</div>
         <div className="flex flex-col">

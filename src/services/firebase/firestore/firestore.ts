@@ -36,7 +36,6 @@ export async function addFriendUsingEmail(email: string) {
   });
   if (!friendDoc) throw new Error("Invalid Email");
   const friendData = (await friendDoc[0].data()) as UserData;
-  console.log(friendData);
   if (
     userData.friends.findIndex((data) => {
       return data.friendUID === friendData.uid;
@@ -59,7 +58,7 @@ export async function addFriendUsingEmail(email: string) {
       }),
     });
   }
-
+  return (await db.doc(localStorage.getItem("uid") as string).get()).data();
   //if (
   //   userData.friends.findIndex((data) => {
   //     return data.friendUID === friendData.uid;
