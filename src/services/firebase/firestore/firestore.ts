@@ -124,3 +124,197 @@ export async function addExpense({
     await db.doc(friendUID).update({ friends: friendData.friends });
   }
 }
+
+export async function addExpenseForUnVerfiedUser({
+  friendUID,
+  payerUID,
+  userUID,
+  expenseId,
+  title,
+  description,
+  payerAmount,
+  totalAmount,
+  friendAmount,
+  settleStatus,
+}: AddExpenseInterface) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const obj = {
+    payerAmount: payerAmount,
+    payerUID: payerUID,
+    expenseId: expenseId,
+    title: title,
+    description: description,
+    totalAmount: totalAmount,
+    friendAmount: friendAmount,
+    settleStatus: settleStatus,
+  };
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+
+  if (index >= 0) {
+    userData.friends[index].paymentDetails.push(obj);
+    await db.doc(userUID).update({ friends: userData.friends });
+  }
+}
+
+export async function settleExpense(
+  userUID: string,
+  friendUID: string,
+  expenseId: string
+) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+  const friendData = (await db.doc(friendUID).get()).data() as UserData;
+  const fIndex = friendData.friends.findIndex((friend) => {
+    return userUID === friend.friendUID;
+  });
+
+  if (index >= 0 && fIndex >= 0) {
+    const userPaymentIndex = userData.friends[index].paymentDetails.findIndex(
+      (val) => val.expenseId === expenseId
+    );
+    const friendPaymentIndex = friendData.friends[
+      index
+    ].paymentDetails.findIndex((val) => val.expenseId === expenseId);
+    if (userPaymentIndex >= 0 && friendPaymentIndex >= 0) {
+      userData.friends[index].paymentDetails[userPaymentIndex].settleStatus =
+        true;
+
+      friendData.friends[fIndex].paymentDetails[
+        friendPaymentIndex
+      ].settleStatus = true;
+      await db.doc(userUID).update({ friends: userData.friends });
+      await db.doc(friendUID).update({ friends: friendData.friends });
+    }
+  }
+}
+
+export async function settleExpenseForUnVerfiedUser(
+  userUID: string,
+  friendUID: string,
+  expenseId: string
+) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+  if (index >= 0) {
+    const userPaymentIndex = userData.friends[index].paymentDetails.findIndex(
+      (val) => val.expenseId === expenseId
+    );
+    if (userPaymentIndex >= 0) {
+      userData.friends[index].paymentDetails[userPaymentIndex].settleStatus =
+        true;
+      await db.doc(userUID).update({ friends: userData.friends });
+    }
+  }
+}
+
+export async function settleAllExpense(userUID: string, friendUID: string) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+  const friendData = (await db.doc(friendUID).get()).data() as UserData;
+  const fIndex = friendData.friends.findIndex((friend) => {
+    return userUID === friend.friendUID;
+  });
+
+  userData.friends[index].paymentDetails = userData.friends[
+    index
+  ].paymentDetails.map((data) => {
+    return {
+      expenseId: data.expenseId,
+      title: data.title,
+      description: data.description,
+      payerUID: data.payerUID,
+      payerAmount: data.payerAmount,
+      friendAmount: data.friendAmount,
+      totalAmount: data.totalAmount,
+      settleStatus: true,
+    };
+  });
+
+  userData.friends[index].paymentDetails = userData.friends[
+    index
+  ].paymentDetails.map((data) => {
+    return {
+      expenseId: data.expenseId,
+      title: data.title,
+      description: data.description,
+      payerUID: data.payerUID,
+      payerAmount: data.payerAmount,
+      friendAmount: data.friendAmount,
+      totalAmount: data.totalAmount,
+      settleStatus: true,
+    };
+  });
+
+  userData.friends[index].paymentDetails = userData.friends[
+    index
+  ].paymentDetails.map((data) => {
+    return {
+      expenseId: data.expenseId,
+      title: data.title,
+      description: data.description,
+      payerUID: data.payerUID,
+      payerAmount: data.payerAmount,
+      friendAmount: data.friendAmount,
+      totalAmount: data.totalAmount,
+      settleStatus: true,
+    };
+  });
+
+  friendData.friends[fIndex].paymentDetails = friendData.friends[
+    fIndex
+  ].paymentDetails.map((data) => {
+    return {
+      expenseId: data.expenseId,
+      title: data.title,
+      description: data.description,
+      payerUID: data.payerUID,
+      payerAmount: data.payerAmount,
+      friendAmount: data.friendAmount,
+      totalAmount: data.totalAmount,
+      settleStatus: true,
+    };
+  });
+
+  await db.doc(userUID).update({ friends: userData.friends });
+  await db.doc(friendUID).update({ friends: friendData.friends });
+}
+
+export async function settleAllExpenseForUnVerfiedUser(
+  userUID: string,
+  friendUID: string
+) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+
+  userData.friends[index].paymentDetails = userData.friends[
+    index
+  ].paymentDetails.map((data) => {
+    return {
+      expenseId: data.expenseId,
+      title: data.title,
+      description: data.description,
+      payerUID: data.payerUID,
+      payerAmount: data.payerAmount,
+      friendAmount: data.friendAmount,
+      totalAmount: data.totalAmount,
+      settleStatus: true,
+    };
+  });
+
+  await db.doc(userUID).update({ friends: userData.friends });
+}

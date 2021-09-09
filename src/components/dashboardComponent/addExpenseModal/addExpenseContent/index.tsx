@@ -2,7 +2,11 @@ import { useState } from "react";
 import { BsX } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import bill from "../../../../icons/bill/bill.svg";
-import { addExpenseRequest } from "../../../../store/actions/expenseActions";
+
+import {
+  addExpenseForUnVerifiedRequest,
+  addExpenseRequest,
+} from "../../../../store/actions/expenseActions";
 import ButtonComponent from "../../../buttonComponent/ButtonComponent";
 import Input from "../../input";
 export interface AddExpenseContentState {
@@ -194,24 +198,41 @@ const AddExpenseContent = ({
                   payerAmountNum = totalAmount / 2;
                   friendAmountNum = totalAmount / 2;
                 } else {
-                  payerAmountNum = totalAmount * parseInt(payerFraction) * 100;
+                  payerAmountNum =
+                    (totalAmount * parseInt(payerFraction)) / 100;
                   friendAmountNum =
-                    totalAmount * parseInt(friendFraction) * 100;
+                    (totalAmount * parseInt(friendFraction)) / 100;
                 }
-                dispatch(
-                  addExpenseRequest(
-                    {
-                      payerAmount: payerAmountNum,
-                      friendAmount: friendAmountNum,
-                      payerUID: paidBy as string,
-                      title: title,
-                      description: description,
-                      totalAmount: totalAmount,
-                    },
-                    userID as string,
-                    friendUID
-                  )
-                );
+                if (isVerified)
+                  dispatch(
+                    addExpenseRequest(
+                      {
+                        payerAmount: payerAmountNum,
+                        friendAmount: friendAmountNum,
+                        payerUID: paidBy as string,
+                        title: title,
+                        description: description,
+                        totalAmount: totalAmount,
+                      },
+                      userID as string,
+                      friendUID
+                    )
+                  );
+                else
+                  dispatch(
+                    addExpenseForUnVerifiedRequest(
+                      {
+                        payerAmount: payerAmountNum,
+                        friendAmount: friendAmountNum,
+                        payerUID: paidBy as string,
+                        title: title,
+                        description: description,
+                        totalAmount: totalAmount,
+                      },
+                      userID as string,
+                      friendUID
+                    )
+                  );
               }
               clearState();
             }}
