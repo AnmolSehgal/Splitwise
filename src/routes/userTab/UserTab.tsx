@@ -14,8 +14,6 @@ export interface UserTabInterface {
 const UserTab = () => {
   const { mode, id } = useParams<UserTabInterface>();
   const { friends } = useSelector((state: GlobalState) => state.friends);
-
-  console.log(mode);
   return (
     <div className="flex justify-center">
       <div className="flex flex-row w-11/12 bg-white justify-evenly border rounded-xl min-h-100 p-3 shadow-xl">

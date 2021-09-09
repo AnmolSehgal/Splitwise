@@ -24,14 +24,14 @@ const expenseReducer = (
     | ReturnType<typeof addExpenseFailure>
 ) => {
   switch (action.type) {
-    case actionTypes.ADD_PAYMENT_REQUEST:
+    case actionTypes.ADD_EXPENSE_REQUEST:
       return { ...state };
-    case actionTypes.ADD_PAYMENT_SUCCESS:
+    case actionTypes.ADD_EXPENSE_SUCCESS:
       return {
         ...state,
         expensesList: [...state.expensesList, action.payload.details],
       };
-    case actionTypes.ADD_PAYMENT_FAILURE:
+    case actionTypes.ADD_EXPENSE_FAILURE:
       return {
         ...state,
         isExpense: false,

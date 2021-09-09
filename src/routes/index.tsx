@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { GlobalState } from "../store/types";
 import UserTab from "./userTab/UserTab";
 import Profile from "./profile/Profile";
 import SignIn from "./signIn/SignIn";
@@ -13,30 +11,27 @@ interface RoutesProps {
 }
 
 const ProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
-  const userLogIn = useSelector(
-    (state: GlobalState) => state.signIn.isLoggedIn
-  );
+  const userUID = localStorage.getItem("uid");
   return (
     <Route
       path={path}
       exact={exact}
       render={() => {
-        return userLogIn ? <Component /> : <Redirect to="/SignIn" />;
+        return userUID ? <Component /> : <Redirect to="/SignIn" />;
       }}
     />
   );
 };
 
 const NonProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
-  const userLogIn = useSelector(
-    (state: GlobalState) => state.signIn.isLoggedIn
-  );
+  const userUID = localStorage.getItem("uid");
+
   return (
     <Route
       path={path}
       exact={exact}
       render={() => {
-        return userLogIn ? <Redirect to="/user/dashboard/" /> : <Component />;
+        return userUID ? <Redirect to="/user/dashboard/" /> : <Component />;
       }}
     />
   );

@@ -1,4 +1,9 @@
 import {
+  addExpenseFailure,
+  addExpenseRequest,
+  addExpenseSuccess,
+} from "../actions/expenseActions";
+import {
   addFriendUsingEmailFailure,
   addFriendUsingEmailRequest,
   addFriendUsingEmailSuccess,
@@ -32,6 +37,9 @@ const friendsReducer = (
     | ReturnType<typeof getFriendsRequest>
     | ReturnType<typeof getFriendsSuccess>
     | ReturnType<typeof getFriendsFailure>
+    | ReturnType<typeof addExpenseRequest>
+    | ReturnType<typeof addExpenseSuccess>
+    | ReturnType<typeof addExpenseFailure>
 ) => {
   switch (action.type) {
     case actionTypes.ADD_FRIEND_USING_NAME_REQUEST:
@@ -67,6 +75,23 @@ const friendsReducer = (
       return {
         ...state,
       };
+    case actionTypes.ADD_EXPENSE_REQUEST:
+      return { ...state };
+    case actionTypes.ADD_EXPENSE_SUCCESS:
+      const friendsData = state.friends.map((friend) => friend);
+      const index = state.friends.findIndex((friend) => {
+        return friend.friendUID === action.payload.friendUID;
+      });
+      friendsData[index].paymentDetails.push(action.payload.details);
+      return {
+        ...state,
+        friends: [...friendsData],
+      };
+    case actionTypes.ADD_EXPENSE_FAILURE:
+      return {
+        ...state,
+      };
+
     default:
       return { ...state };
   }

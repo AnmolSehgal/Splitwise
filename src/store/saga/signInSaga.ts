@@ -22,7 +22,7 @@ function* signInAuthSaga({
     yield put(getFriendsRequest());
     history.push("/user/dashboard");
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     yield put(signInAuthFailure());
   }
 }

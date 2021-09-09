@@ -1,11 +1,6 @@
 import firebase from "firebase/app";
-import { ExpenseInfo, UserData } from "../../../store/types";
+import { AddExpenseInterface, UserData } from "../../../store/types";
 import { v4 as uuid } from "uuid";
-
-export async function addExpense(paymentDetails: ExpenseInfo) {
-  const db = await firebase.firestore().collection("/payments");
-  await db.doc(paymentDetails.expenseId).set(paymentDetails);
-}
 
 export async function settingUpUser(
   uid: string,
@@ -88,4 +83,44 @@ export async function getUserFriends() {
   return (await (
     await db.doc(localStorage.getItem("uid") as string).get()
   ).data()) as UserData;
+}
+
+export async function addExpense({
+  friendUID,
+  payerUID,
+  userUID,
+  expenseId,
+  title,
+  description,
+  payerAmount,
+  totalAmount,
+  friendAmount,
+  settleStatus,
+}: AddExpenseInterface) {
+  const db = await firebase.firestore().collection("/userDetails");
+  const userData = (await db.doc(userUID).get()).data() as UserData;
+  const obj = {
+    payerAmount: payerAmount,
+    payerUID: payerUID,
+    expenseId: expenseId,
+    title: title,
+    description: description,
+    totalAmount: totalAmount,
+    friendAmount: friendAmount,
+    settleStatus: settleStatus,
+  };
+  const index = userData.friends.findIndex((friend) => {
+    return friendUID === friend.friendUID;
+  });
+  const friendData = (await db.doc(friendUID).get()).data() as UserData;
+  const fIndex = friendData.friends.findIndex((friend) => {
+    return userUID === friend.friendUID;
+  });
+
+  if (index >= 0 && fIndex >= 0) {
+    userData.friends[index].paymentDetails.push(obj);
+    friendData.friends[index].paymentDetails.push(obj);
+    await db.doc(userUID).update({ friends: userData.friends });
+    await db.doc(friendUID).update({ friends: friendData.friends });
+  }
 }

@@ -19,6 +19,7 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
           <PrimaryButton label="Settle all" onClick={() => {}} />
         </div>
       </div>
+      <div className="pt-3"></div>
       <AddExpenseModal
         display={display}
         friendUID={friendUID}

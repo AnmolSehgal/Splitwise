@@ -23,7 +23,7 @@ function* signUpAuthSaga({
     yield put(signUpAuthSuccess());
     history.push("user/dashboard");
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     yield put(signUpAuthFailure());
   }
 }

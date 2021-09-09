@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BsX } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import bill from "../../../../icons/bill/bill.svg";
+import { addExpenseRequest } from "../../../../store/actions/expenseActions";
 import ButtonComponent from "../../../buttonComponent/ButtonComponent";
 import Input from "../../input";
 export interface AddExpenseContentState {
@@ -25,8 +27,9 @@ const AddExpenseContent = ({
   const [paidBy, setPaidBy] = useState(userID);
   const [payer, setPayer] = useState(false);
   const [splitMode, setSplitMode] = useState("equality");
-  const [payerFraction, setPayerFraction] = useState("");
-  const [friendFraction, setFriendFraction] = useState("");
+  const [payerFraction, setPayerFraction] = useState("0");
+  const [friendFraction, setFriendFraction] = useState("100");
+  const dispatch = useDispatch();
 
   const clearState = () => {
     setTitle("");
@@ -184,6 +187,32 @@ const AddExpenseContent = ({
             className=" border border-froly py-2 px-3 rounded-xl text-froly hover:bg-froly hover:text-white "
             onClick={() => {
               handleDisplay();
+              const totalAmount = parseInt(amount);
+              if (totalAmount > 0) {
+                let payerAmountNum, friendAmountNum;
+                if (splitMode === "equality") {
+                  payerAmountNum = totalAmount / 2;
+                  friendAmountNum = totalAmount / 2;
+                } else {
+                  payerAmountNum = totalAmount * parseInt(payerFraction) * 100;
+                  friendAmountNum =
+                    totalAmount * parseInt(friendFraction) * 100;
+                }
+                dispatch(
+                  addExpenseRequest(
+                    {
+                      payerAmount: payerAmountNum,
+                      friendAmount: friendAmountNum,
+                      payerUID: paidBy as string,
+                      title: title,
+                      description: description,
+                      totalAmount: totalAmount,
+                    },
+                    userID as string,
+                    friendUID
+                  )
+                );
+              }
               clearState();
             }}
           />

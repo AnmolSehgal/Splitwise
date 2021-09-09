@@ -42,11 +42,10 @@ export interface ExpenseInfo {
   expenseId: string;
   title: string;
   description: string;
-  payerId: string;
+  payerUID: string;
   payerAmount: number;
   totalAmount: number;
   friendAmount: number;
-  modifiedDate: string;
 }
 
 export interface UserData {
@@ -61,4 +60,17 @@ export interface Friend {
   isVerified: boolean;
   paymentDetails: ExpenseInfo[];
   friendUID: string;
+}
+
+export interface AddExpenseInterface {
+  friendUID: string;
+  payerUID: string;
+  userUID: string;
+  expenseId: string;
+  title: string;
+  description: string;
+  payerAmount: number;
+  totalAmount: number;
+  friendAmount: number;
+  settleStatus: boolean;
 }

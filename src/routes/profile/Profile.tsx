@@ -36,8 +36,6 @@ const Profile = () => {
   const [prevPassword, setPrevPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  console.log(name);
-
   return (
     <div className="flex justify-center items-center">
       <div className="flex flex-col p-2 border rounded-lg w-11/12 md:w-1/2 shadow-md">

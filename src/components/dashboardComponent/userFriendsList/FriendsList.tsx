@@ -1,11 +1,9 @@
+import { useSelector } from "react-redux";
 import history from "../../../store/history/history";
-import { Friend } from "../../../store/types";
+import { GlobalState } from "../../../store/types";
 
-interface FriendsProps {
-  friends: Friend[];
-}
-
-const FriendsList = ({ friends }: FriendsProps) => {
+const FriendsList = () => {
+  const friends = useSelector((state: GlobalState) => state.friends.friends);
   return (
     <div className=" flex flex-col">
       {friends.map(({ userName, friendUID }, index) => {
