@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 
 export const signInAuthRequest = (email: string, password: string) => {
   return {

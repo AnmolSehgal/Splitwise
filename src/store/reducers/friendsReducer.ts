@@ -29,7 +29,7 @@ import {
   getFriendsRequest,
   getFriendsSuccess,
 } from "../actions/friendAction";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { Friend } from "../types";
 
 export interface FriendState {

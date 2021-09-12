@@ -6,7 +6,7 @@ import {
   signInAuthRequest,
   signInAuthSuccess,
 } from "../actions/signInAction";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import history from "../history/history";
 
 function* signInAuthSaga({

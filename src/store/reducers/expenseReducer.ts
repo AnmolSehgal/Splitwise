@@ -3,7 +3,7 @@ import {
   addExpenseRequest,
   addExpenseSuccess,
 } from "../actions/expenseActions";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { ExpenseInfo } from "../types";
 
 export interface ExpenseState {

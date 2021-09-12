@@ -1,5 +1,5 @@
 import { ErrorState } from "../types";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { showErrorRequest, hideErrorRequest } from "../actions/errorsActions";
 
 const initState: ErrorState = {

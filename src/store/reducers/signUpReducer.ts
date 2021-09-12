@@ -1,5 +1,5 @@
 import { SignUpState } from "../types";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import {
   signUpAuthFailure,
   signUpAuthRequest,

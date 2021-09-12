@@ -27,7 +27,7 @@ import {
   settleAllExpenseRequest,
   settleAllExpenseSuccess,
 } from "../actions/expenseActions";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 
 function* addExpenseSaga({ payload }: ReturnType<typeof addExpenseRequest>) {
   try {

@@ -12,7 +12,7 @@ import {
   addFriendUsingNameSuccess,
   getFriendsSuccess,
 } from "../actions/friendAction";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 
 function* addFriendUsingEmailSaga({
   payload,

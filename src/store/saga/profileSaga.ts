@@ -1,6 +1,6 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { ProfileStateObject } from "../types";
 import { userSignOut } from "../../services/firebase/auth";
 

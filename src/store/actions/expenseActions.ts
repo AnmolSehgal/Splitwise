@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { v4 as uuid } from "uuid";
 import { AddExpenseInterface } from "../types";
 

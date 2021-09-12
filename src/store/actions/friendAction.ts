@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 export const addFriendUsingEmailRequest = (email: string) => {
   return {
     type: actionTypes.ADD_FRIEND_EMAIL_REQUEST,
