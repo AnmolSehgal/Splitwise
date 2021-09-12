@@ -3,7 +3,7 @@ import { Redirect, useParams } from "react-router";
 import DashboardComponent from "../../components/dashboardComponent/userDashboard";
 import FriendExpenseTab from "../../components/dashboardComponent/friendExpenseTab";
 
-import UserNavbar from "../../components/dashboardComponent/UserSideBar";
+import UserNavbar from "../../components/dashboardComponent/userSideBar";
 import { GlobalState } from "../../store/types";
 
 export interface UserTabInterface {

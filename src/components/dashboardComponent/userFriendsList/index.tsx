@@ -1,5 +1,5 @@
 import { RiAddLine } from "react-icons/ri";
-import FriendsList from "./FriendsList";
+import FriendsList from "./friendsList";
 export interface userFriendsProps {
   handleChange: () => void;
 }

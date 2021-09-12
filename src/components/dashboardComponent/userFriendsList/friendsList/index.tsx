@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import history from "../../../store/history/history";
-import { GlobalState } from "../../../store/types";
+import history from "../../../../store/history/history";
+import { GlobalState } from "../../../../store/types";
 
 const FriendsList = () => {
   const friends = useSelector((state: GlobalState) => state.friends.friends);
