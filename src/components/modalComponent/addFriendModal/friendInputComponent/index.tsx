@@ -1,4 +1,4 @@
-import InputComponent from "../../../inputComponent/InputComponent";
+import InputComponent from "../../../inputComponent";
 import PrimaryButton from "../../../navbarComponent/primaryButtonComponent";
 
 interface FriendInputProps {

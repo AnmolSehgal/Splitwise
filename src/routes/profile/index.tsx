@@ -3,7 +3,7 @@ import { BsX, BsCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import InputComponent from "../../components/inputComponent/InputComponent";
+import InputComponent from "../../components/inputComponent";
 import ProfileEditComponent from "../../components/profileComponents/profileEditComponent";
 import DisplayComponent from "../../components/profileComponents/displayComponent";
 import PrimaryButton from "../../components/navbarComponent/primaryButtonComponent";

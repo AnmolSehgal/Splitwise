@@ -1,5 +1,5 @@
 import ButtonComponent from "../buttonComponent";
-import InputComponent from "../inputComponent/InputComponent";
+import InputComponent from "../inputComponent";
 import { formType } from "../type";
 import signin from "../../icons/auth/signin.svg";
 import signup from "../../icons/auth/signup.svg";
