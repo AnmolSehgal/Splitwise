@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DisplayComponent from "./DisplayComponent";
+import DisplayComponent from "../displayComponent";
 
 interface ProfileEditComponentProps {
   label: string;

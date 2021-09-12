@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import history from "./store/history/history";
-import Navbar from "./components/navbarComponent/Navbar";
+import Navbar from "./components/navbarComponent";
 import Routes from "./routes";
 
 import bgImage from "./icons/background/backgroundImage.svg";

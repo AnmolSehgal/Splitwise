@@ -5,7 +5,7 @@ import {
   settleAllExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { Friend, GlobalState } from "../../../store/types";
-import PrimaryButton from "../../navbarComponent/PrimaryButtonComponent";
+import PrimaryButton from "../../navbarComponent/primaryButtonComponent";
 import AddExpenseModal from "../addExpenseModal";
 import ExpenseDisplayList from "../expensDisplayList";
 

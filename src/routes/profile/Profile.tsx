@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import InputComponent from "../../components/inputComponent/InputComponent";
-import ProfileEditComponent from "../../components/profileComponents/ProfileEditComponent";
-import DisplayComponent from "../../components/profileComponents/DisplayComponent";
-import PrimaryButton from "../../components/navbarComponent/PrimaryButtonComponent";
+import ProfileEditComponent from "../../components/profileComponents/profileEditComponent";
+import DisplayComponent from "../../components/profileComponents/displayComponent";
+import PrimaryButton from "../../components/navbarComponent/primaryButtonComponent";
 
 import { GlobalState, ProfileObject } from "../../store/types";
 

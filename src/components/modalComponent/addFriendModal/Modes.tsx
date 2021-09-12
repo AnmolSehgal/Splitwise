@@ -5,7 +5,7 @@ import {
   addFriendUsingEmailRequest,
   addFriendUsingNameRequest,
 } from "../../../store/actions/friendAction";
-import PrimaryButton from "../../navbarComponent/PrimaryButtonComponent";
+import PrimaryButton from "../../navbarComponent/primaryButtonComponent";
 import FriendInputComponent from "./FriendInputComponent";
 import { regExp } from "../../type";
 interface ModesProps {

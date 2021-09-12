@@ -1,4 +1,4 @@
-import ButtonComponent from "../buttonComponent/ButtonComponent";
+import ButtonComponent from "../../buttonComponent/ButtonComponent";
 
 interface NavbarButtonState {
   label: string;
