@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { checkUserRequest } from "../../store/actions/expenseActions";
-import ButtonComponent from "../buttonComponent/ButtonComponent";
+import { checkUserRequest } from "../../../store/actions/expenseActions";
+import ButtonComponent from "../../buttonComponent";
 
 const CheckButton = () => {
   const dispatch = useDispatch();

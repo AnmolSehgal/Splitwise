@@ -5,7 +5,7 @@ import {
   settleExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { ExpenseInfo } from "../../../store/types";
-import ButtonComponent from "../../buttonComponent/ButtonComponent";
+import ButtonComponent from "../../buttonComponent";
 
 interface ExpenseDisplayProps {
   payment: ExpenseInfo;

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { showErrorRequest } from "../../../store/actions/errorsActions";
+import { showErrorRequest } from "../../../../store/actions/errorsActions";
 import {
   addFriendUsingEmailRequest,
   addFriendUsingNameRequest,
-} from "../../../store/actions/friendAction";
-import PrimaryButton from "../../navbarComponent/primaryButtonComponent";
-import FriendInputComponent from "./FriendInputComponent";
-import { regExp } from "../../type";
+} from "../../../../store/actions/friendAction";
+import PrimaryButton from "../../../navbarComponent/primaryButtonComponent";
+import FriendInputComponent from "../friendInputComponent";
+import { regExp } from "../../../type";
 interface ModesProps {
   handleModes: (mode: string) => void;
   handleDispaly: () => void;

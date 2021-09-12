@@ -1,4 +1,4 @@
-import Modal from "../../modalComponent/Modal";
+import Modal from "../../modalComponent";
 import AddExpenseContent from "./addExpenseContent";
 
 export interface AddExpenseModalState {

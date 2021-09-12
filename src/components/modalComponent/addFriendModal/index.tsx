@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsX, BsArrowLeftShort } from "react-icons/bs";
-import Modal from "../Modal";
-import Modes from "./Modes";
+import Modal from "..";
+import Modes from "./modes";
 
 export interface AddFriendProps {
   display: boolean;

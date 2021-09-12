@@ -7,7 +7,7 @@ import {
   addExpenseForUnVerifiedRequest,
   addExpenseRequest,
 } from "../../../../store/actions/expenseActions";
-import ButtonComponent from "../../../buttonComponent/ButtonComponent";
+import ButtonComponent from "../../../buttonComponent";
 import Input from "../../input";
 export interface AddExpenseContentState {
   handleDisplay: () => void;
