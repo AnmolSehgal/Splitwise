@@ -3,7 +3,7 @@ import {
   addFriendUsingEmail,
   addFriendUsingName,
   getUserFriends,
-} from "../../services/firebase/firestore/firestore";
+} from "../../services/firebase/firestore";
 import { showErrorRequest } from "../actions/errorsActions";
 import {
   addFriendUsingEmailRequest,

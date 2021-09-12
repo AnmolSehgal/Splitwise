@@ -1,8 +1,8 @@
 import firebase from "firebase";
 import "firebase/auth";
 import { ProfileObject } from "../../../store/types";
-import { settingUpUser } from "../firestore/firestore";
-import { uploadImage } from "../storage/storage";
+import { settingUpUser } from "../firestore";
+import { uploadImage } from "../storage";
 
 export const signInAuth = async (email: string, password: string) => {
   const data = await firebase

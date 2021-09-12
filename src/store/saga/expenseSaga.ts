@@ -7,7 +7,7 @@ import {
   settleExpense,
   settleExpenseForUnVerfiedUser,
   userValid,
-} from "../../services/firebase/firestore/firestore";
+} from "../../services/firebase/firestore";
 import {
   addExpenseRequest,
   addExpenseSuccess,
