@@ -1,8 +1,8 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import UserTab from "./userTab/UserTab";
-import Profile from "./profile/Profile";
-import SignIn from "./signIn/SignIn";
-import SignUp from "./signUp/SignUp";
+import UserTab from "./userTab";
+import Profile from "./profile";
+import SignIn from "./signIn";
+import SignUp from "./signUp";
 
 interface RoutesProps {
   path: string;
