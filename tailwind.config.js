@@ -10,6 +10,8 @@ module.exports = {
         24: "6rem",
         28: "7rem",
         32: "8rem",
+        96: "24rem",
+        100: "32rem",
         full: "100%",
       },
       colors: {

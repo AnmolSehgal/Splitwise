@@ -3,12 +3,16 @@ import ButtonComponent from "../buttonComponent/ButtonComponent";
 interface NavbarButtonState {
   label: string;
   onClick?: () => void;
+  className?: string;
 }
 
-const NavbarButton = ({ label, onClick }: NavbarButtonState) => {
+const PrimaryButton = ({ label, onClick, className }: NavbarButtonState) => {
   return (
     <ButtonComponent
-      className=" border text-froly border-froly rounded-lg m-2 text-lg px-2 hover:bg-froly hover:text-white"
+      className={
+        " border text-froly border-froly rounded-lg m-2 text-lg px-2 hover:bg-froly hover:text-white " +
+        (className ? className : "")
+      }
       btnLabel={label}
       onClick={
         onClick
@@ -21,4 +25,4 @@ const NavbarButton = ({ label, onClick }: NavbarButtonState) => {
   );
 };
 
-export default NavbarButton;
+export default PrimaryButton;

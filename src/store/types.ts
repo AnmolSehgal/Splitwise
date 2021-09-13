@@ -1,3 +1,5 @@
+import { FriendState } from "./reducers/friendsReducer";
+
 export interface LoginState {
   loginFailed: boolean;
   isLoggedIn: boolean;
@@ -27,4 +29,32 @@ export interface GlobalState {
   signIn: LoginState;
   signUp: SignUpState;
   profile: ProfileStateObject;
+  friends: FriendState;
+}
+
+export interface ExpenseInfo {
+  settleStatus: boolean;
+  expenseId: string;
+  title: string;
+  description: string;
+  friend: string;
+  friendUid?: string;
+  paidBy: string;
+  userAmount: number;
+  totalAmount: number;
+  friendAmount: number;
+  date: Date;
+  settleDate: Date | undefined;
+}
+
+export interface UserData {
+  userName: string;
+  email: string;
+  friends: Friend[];
+}
+
+export interface Friend {
+  userName: string;
+  email: string | null;
+  relationId: string;
 }

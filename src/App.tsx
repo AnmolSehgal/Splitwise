@@ -3,22 +3,27 @@ import firebase from "firebase";
 import "firebase/auth";
 import { ConnectedRouter } from "connected-react-router";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import history from "./store/history/history";
 import Navbar from "./components/navbarComponent/Navbar";
 import Routes from "./routes";
-import { GlobalState, ProfileStateObject } from "./store/types";
+
+import bgImage from "./icons/background/backgroundImage.svg";
+
+import { ProfileStateObject } from "./store/types";
 import { fetchUserInfoSuccess } from "./store/actions/profileActions";
 import { signOutRequest } from "./store/actions/signOut";
 import {
   userLoginStatusFailure,
   userLoginStatusSuccess,
 } from "./store/actions/signInAction";
+import { getFriendsRequest } from "./store/actions/friendAction";
+
 function App() {
-  const userLogin = useSelector(
-    (state: GlobalState) => state.signIn.isLoggedIn
-  );
+  // const userLogin = useSelector(
+  //   (state: GlobalState) => state.signIn.isLoggedIn
+  // );
 
   const dispatch = useDispatch();
 
@@ -36,15 +41,25 @@ function App() {
         dispatch(signOutRequest());
       }
     });
-    if (localStorage.getItem("uid")) dispatch(userLoginStatusSuccess());
-    else dispatch(userLoginStatusFailure());
-  }, [dispatch, userLogin]);
+    if (localStorage.getItem("uid")) {
+      dispatch(userLoginStatusSuccess());
+      dispatch(getFriendsRequest());
+    } else dispatch(userLoginStatusFailure());
+  }, [dispatch]);
 
   return (
-    <ConnectedRouter history={history}>
-      <Navbar />
-      <Routes />
-    </ConnectedRouter>
+    <div
+      className="h-screen"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <ConnectedRouter history={history}>
+        <Navbar />
+        <Routes />
+      </ConnectedRouter>
+    </div>
   );
 }
 

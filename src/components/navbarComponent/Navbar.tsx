@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { signOutRequest } from "../../store/actions/signOut";
 
 import { GlobalState } from "../../store/types";
-import NavbarButton from "./NavbarButtonComponent";
+import PrimaryButton from "./PrimaryButtonComponent";
 
 const Navbar = () => {
   const userLogin = useSelector(
@@ -21,27 +21,27 @@ const Navbar = () => {
           ""
         ) : (
           <Link to="/SignIn">
-            <NavbarButton label="Sign In" />
+            <PrimaryButton label="Sign In" />
           </Link>
         )}
         {userLogin ? (
           ""
         ) : (
           <Link to="/SignUp">
-            <NavbarButton label="Sign Up" />
+            <PrimaryButton label="Sign Up" />
           </Link>
         )}
 
         {userLogin ? (
           <Link to="/profile">
-            <NavbarButton label="Profile" />
+            <PrimaryButton label="Profile" />
           </Link>
         ) : (
           ""
         )}
 
         {userLogin ? (
-          <NavbarButton
+          <PrimaryButton
             label="Sign out"
             onClick={() => {
               dispatch(signOutRequest());

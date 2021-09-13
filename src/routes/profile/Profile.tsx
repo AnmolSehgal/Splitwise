@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { BsX, BsCheck } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import InputComponent from "../../components/inputComponent/InputComponent";
 import ProfileEditComponent from "../../components/profileComponents/ProfileEditComponent";
 import DisplayComponent from "../../components/profileComponents/DisplayComponent";
-import ButtonComponent from "../../components/buttonComponent/ButtonComponent";
+import PrimaryButton from "../../components/navbarComponent/PrimaryButtonComponent";
+
 import { GlobalState, ProfileObject } from "../../store/types";
-import { useDispatch, useSelector } from "react-redux";
+
 import { updateUserInfoRequest } from "../../store/actions/profileActions";
-import { useEffect } from "react";
 
 const Profile = () => {
   const {
@@ -38,24 +40,31 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="flex flex-col p-2 border rounded-lg w-1/2 shadow-md">
+      <div className="flex flex-col p-2 border rounded-lg w-11/12 md:w-1/2 shadow-md">
         <div className="text-3xl mb-4 py-1 border-b">Profile</div>
-        <div className="flex flex-row justify-evenly">
-          <div className="flex flex-col mr-6">
+        <div className="flex flex-row justify-evenly flex-wrap">
+          <div className="flex flex-col items-center mr-6">
             <img
               src={userImage}
               alt="profile"
-              className="h-28 w-28 border mb-5 rounded-xl"
+              className="h-36 w-36 border mb-5 rounded-xl"
             />
+            <div className=" text-center px-6 py-1 border text-froly border-froly rounded-lg m-2 text-lg hover:bg-froly hover:text-white">
+              <label htmlFor="image" className="">
+                Upload
+              </label>
+            </div>
+
             <input
+              hidden
+              id="image"
               type="file"
-              className=" h-7.5 text-md bg-secondary-500 border rounded-"
               onChange={(event) => {
                 if (event.target.files) setImage(event.target.files[0]);
               }}
             />
           </div>
-          <div>
+          <div className="flex flex-col items-start">
             <ProfileEditComponent label="Name" val={name} onChange={setName} />
             <ProfileEditComponent
               label="Email"
@@ -113,9 +122,9 @@ const Profile = () => {
                 />
               </div>
             )}
-            <ButtonComponent
-              btnLabel="Save"
-              className="w-24 h-12 text-white bg-froly border rounded-lg"
+            <PrimaryButton
+              label="Save"
+              className="w-24 h-12 "
               onClick={() => {
                 let updateInfo: ProfileObject = {};
                 if (image) updateInfo.image = image;

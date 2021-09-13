@@ -1,5 +1,5 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
-import { signUpAuth } from "../../services/firebase/auth/authentication";
+import { signUpAuth } from "../../services/firebase/auth";
 import {} from "../actions/signInAction";
 import {
   signUpAuthFailure,
@@ -13,10 +13,15 @@ function* signUpAuthSaga({
   payload,
 }: ReturnType<typeof signUpAuthRequest>): Generator {
   try {
-    const uid = yield signUpAuth(payload.email, payload.password, payload.name);
-    localStorage.setItem("uid", uid as string);
+    yield signUpAuth(payload.email, payload.password, payload.name).then(
+      (data) => {
+        localStorage.setItem("uid", data.uid as string);
+        localStorage.setItem("userName", data.userName as string);
+        localStorage.setItem("email", data.email as string);
+      }
+    );
     yield put(signUpAuthSuccess());
-    history.push("/dashboard");
+    history.push("user/dashboard");
   } catch (error) {
     console.log(error);
     yield put(signUpAuthFailure());
