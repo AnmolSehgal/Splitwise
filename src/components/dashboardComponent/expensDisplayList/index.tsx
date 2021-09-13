@@ -25,7 +25,9 @@ const ExpenseDisplayList = ({
     <div className="flex flex-col h-96 overflow-y-scroll">
       <div className="border-b  text-gray-700 text-lg">Details</div>
       {count === 0 ? (
-        <div className=" text-gray-700 text-lg">There is nothing to settle</div>
+        <div className="flex flex-row justify-center text-gray-700 text-lg py-3">
+          There is nothing to {settle ? "unsettle" : "settle"}
+        </div>
       ) : (
         paymentDetails.map((payment) => {
           return payment.settleStatus === settle ? (

@@ -159,7 +159,8 @@ const friendsReducer = (
         (data) => data.expenseId === action.payload.expenseId
       );
 
-      data[findex].paymentDetails[expIndex].settleStatus = true;
+      data[findex].paymentDetails[expIndex].settleStatus =
+        !data[findex].paymentDetails[expIndex].settleStatus;
       return {
         ...state,
         friends: [...data],
@@ -181,7 +182,8 @@ const friendsReducer = (
       const expIdx = frienddata[fIdx].paymentDetails.findIndex(
         (data) => data.expenseId === action.payload.expenseId
       );
-      frienddata[fIdx].paymentDetails[expIdx].settleStatus = true;
+      frienddata[fIdx].paymentDetails[expIdx].settleStatus =
+        !frienddata[fIdx].paymentDetails[expIdx].settleStatus;
       return {
         ...state,
         friends: [...frienddata],

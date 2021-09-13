@@ -40,7 +40,7 @@ const DashboardComponent = () => {
               return amount < 0;
             }}
             className="bg-red-500"
-            listName="you owe"
+            listName="You owe"
             message="You do not owe anything"
           />
         </div>

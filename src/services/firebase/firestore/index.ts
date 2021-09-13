@@ -183,11 +183,13 @@ export async function settleExpense(
     ].paymentDetails.findIndex((val) => val.expenseId === expenseId);
     if (userPaymentIndex >= 0 && friendPaymentIndex >= 0) {
       userData.friends[index].paymentDetails[userPaymentIndex].settleStatus =
-        true;
+        !userData.friends[index].paymentDetails[userPaymentIndex].settleStatus;
 
       friendData.friends[fIndex].paymentDetails[
         friendPaymentIndex
-      ].settleStatus = true;
+      ].settleStatus =
+        !friendData.friends[fIndex].paymentDetails[friendPaymentIndex]
+          .settleStatus;
       await db.doc(userUID).update({ friends: userData.friends });
       await db.doc(friendUID).update({ friends: friendData.friends });
     }
@@ -210,7 +212,8 @@ export async function settleExpenseForUnVerfiedUser(
     );
     if (userPaymentIndex >= 0) {
       userData.friends[index].paymentDetails[userPaymentIndex].settleStatus =
-        true;
+        !userData.friends[index].paymentDetails[userPaymentIndex].settleStatus;
+
       await db.doc(userUID).update({ friends: userData.friends });
     }
   }
