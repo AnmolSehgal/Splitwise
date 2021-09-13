@@ -12,6 +12,7 @@ interface ExpenseDisplayProps {
   friendName: string;
   friendUID: string;
   isVerified: boolean;
+  btnLabel: string;
 }
 
 const ExpenseDisplay = ({
@@ -19,6 +20,7 @@ const ExpenseDisplay = ({
   friendName,
   friendUID,
   isVerified,
+  btnLabel,
 }: ExpenseDisplayProps) => {
   const { title, description, totalAmount, friendAmount, payerUID, expenseId } =
     payment;
@@ -50,7 +52,7 @@ const ExpenseDisplay = ({
         </div>
         <div>
           <ButtonComponent
-            btnLabel="Settle"
+            btnLabel={btnLabel}
             className=" bg-froly-400 border border-gray-50 p-1 rounded-lg  hover:bg-gray-50 hover:border-froly-400 hover:text-froly-400"
             onClick={() => {
               console.log(isVerified + "---- verified user");

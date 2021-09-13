@@ -15,7 +15,7 @@ const UserTab = () => {
   const { mode, id } = useParams<UserTabInterface>();
   const { friends } = useSelector((state: GlobalState) => state.friends);
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center w-screen md:w-full">
       <div className="flex flex-row w-11/12 bg-white justify-evenly border rounded-xl min-h-100 p-3 shadow-xl">
         <div className="flex flex-col w-3/12 border-r">
           <UserNavbar />
@@ -33,7 +33,7 @@ const UserTab = () => {
                 return;
               }
               default:
-                <Redirect to="/user/dashboard" />;
+                <Redirect to="/dashboard" />;
             }
           })(mode)}
         </div>

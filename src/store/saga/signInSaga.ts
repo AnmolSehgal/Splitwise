@@ -20,7 +20,7 @@ function* signInAuthSaga({
     });
     yield put(signInAuthSuccess());
     yield put(getFriendsRequest());
-    history.push("/user/dashboard");
+    history.push("/dashboard");
   } catch (error) {
     //console.log(error);
     yield put(signInAuthFailure());

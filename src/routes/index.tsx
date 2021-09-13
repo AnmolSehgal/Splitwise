@@ -31,7 +31,7 @@ const NonProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
       path={path}
       exact={exact}
       render={() => {
-        return userUID ? <Redirect to="/user/dashboard/" /> : <Component />;
+        return userUID ? <Redirect to="/dashboard/" /> : <Component />;
       }}
     />
   );
@@ -42,12 +42,8 @@ const Routes = () => {
     <Switch>
       <NonProtectedRoutes path="/SignUp" Component={SignUp} exact={true} />
       <NonProtectedRoutes path="/SignIn" Component={SignIn} exact={true} />
-      <ProtectedRoutes
-        path="/user/:mode/:id?"
-        Component={UserTab}
-        exact={false}
-      />
       <ProtectedRoutes path="/profile" exact={true} Component={Profile} />
+      <ProtectedRoutes path="/:mode/:id?" Component={UserTab} exact={false} />
     </Switch>
   );
 };

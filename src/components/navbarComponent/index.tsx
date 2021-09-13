@@ -13,9 +13,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-row justify-between items-center mb-6 py-2">
-      <div className=" font-mono font-bold text-gray-700 font ml-2 text-3xl">
-        Splitwize
-      </div>
+      <Link to="/dashboard">
+        <div className=" font-mono font-bold text-gray-700 font ml-2 text-3xl">
+          Splitwize
+        </div>
+      </Link>
       <div className="flex flex-row ">
         {userLogin ? (
           ""

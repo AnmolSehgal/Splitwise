@@ -6,6 +6,7 @@ interface ExpenseDisplayListState {
   friendUID: string;
   friendName: string;
   isVerified: boolean;
+  settle: boolean;
 }
 
 const ExpenseDisplayList = ({
@@ -13,20 +14,32 @@ const ExpenseDisplayList = ({
   friendName,
   friendUID,
   isVerified,
+  settle,
 }: ExpenseDisplayListState) => {
+  let count = 0;
+  paymentDetails.forEach((data) => {
+    if (data.settleStatus === settle) count++;
+  });
+
   return (
     <div className="flex flex-col h-96 overflow-y-scroll">
-      {paymentDetails.map((payment) => {
-        return !payment.settleStatus ? (
-          <ExpenseDisplay
-            key={payment.expenseId}
-            payment={payment}
-            friendName={friendName}
-            friendUID={friendUID}
-            isVerified={isVerified}
-          />
-        ) : null;
-      })}
+      <div className="border-b  text-gray-700 text-lg">Details</div>
+      {count === 0 ? (
+        <div className=" text-gray-700 text-lg">There is nothing to settle</div>
+      ) : (
+        paymentDetails.map((payment) => {
+          return payment.settleStatus === settle ? (
+            <ExpenseDisplay
+              btnLabel={settle ? "unsettle" : "settle"}
+              key={payment.expenseId}
+              payment={payment}
+              friendName={friendName}
+              friendUID={friendUID}
+              isVerified={isVerified}
+            />
+          ) : null;
+        })
+      )}
     </div>
   );
 };

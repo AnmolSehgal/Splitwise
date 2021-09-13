@@ -7,7 +7,7 @@ const UserNavbar = () => {
   const [addFriend, setAddFriend] = useState(false);
   return (
     <div className="flex flex-col text-gray-500 px-3  font-mono pt-6 ">
-      <Link to="/user/dashboard">
+      <Link to="/dashboard">
         <div className="mb-3">Dashboard</div>
       </Link>
       <div className="mb-3">

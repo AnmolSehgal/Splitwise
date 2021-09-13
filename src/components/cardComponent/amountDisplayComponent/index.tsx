@@ -9,7 +9,7 @@ const AmountDisplayComponent = ({
 }: AmountDisplayComponentProps) => {
   return (
     <div className="flex flex-col">
-      <div>{owed ? "total owed" : "total owe"}</div>
+      <div>{owed ? "total you lent" : "total you owe"}</div>
       <div>Rs : {amount}</div>
     </div>
   );

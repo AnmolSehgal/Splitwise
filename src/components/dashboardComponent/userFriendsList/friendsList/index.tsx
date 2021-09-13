@@ -12,7 +12,7 @@ const FriendsList = () => {
             key={index}
             className="p-2 border-b mx-2"
             onClick={() => {
-              history.push(`/user/friend/${friendUID}`);
+              history.push(`/friend/${friendUID}`);
             }}
           >
             {userName}

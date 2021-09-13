@@ -7,7 +7,9 @@ const AlertComponent = () => {
   const { errorMessage, showError } = useSelector(
     (state: GlobalState) => state.error
   );
+
   const dispatch = useDispatch();
+
   return showError ? (
     <div className="flex justify-evenly text-xl text-white items-center absolute top-0 w-screen bg-malibu rounded-b ">
       <div>{errorMessage}</div>

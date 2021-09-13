@@ -5,12 +5,15 @@ import {
   settleAllExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { Friend, GlobalState } from "../../../store/types";
+import CardComponent from "../../cardComponent";
 import PrimaryButton from "../../navbarComponent/primaryButtonComponent";
 import AddExpenseModal from "../addExpenseModal";
 import ExpenseDisplayList from "../expensDisplayList";
 
 const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   const [display, setDisplay] = useState(false);
+  const [settle, setSettle] = useState(false);
+
   const friendsData = useSelector(
     (state: GlobalState) => state.friends.friends
   );
@@ -19,12 +22,23 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   });
   const dispatch = useDispatch();
 
+  let owe = 0,
+    owed = 0;
+
   const paymentDetails = index >= 0 ? friendsData[index].paymentDetails : [];
+
+  paymentDetails.forEach((data) => {
+    if (!data.settleStatus) {
+      if (data.payerUID === localStorage.getItem("uid"))
+        owed += data.friendAmount;
+      else owe += data.friendAmount;
+    }
+  });
+
   return (
     <div className="flex flex-col px-2">
-      <div className="flex flex-row w-full justify-between items-center px-2 border-b">
-        <div className=" text-gray-700 text-xl">{userName}</div>
-        <div className="flex flex-row">
+      <div className="flex flex-row w-full justify-end items-center px-2 border-b">
+        <div className="flex flex-row justify-end">
           <PrimaryButton
             label="Add expense"
             onClick={() => {
@@ -45,13 +59,38 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
         </div>
       </div>
       <div className="pt-3">
+        <div className="mb-3">
+          <CardComponent owe={owe} owed={owed} friendName={userName}>
+            <div className="border-t border-white flex flex-row py-1">
+              <div
+                className="flex justify-center items-center w-1/2 border-r border-white"
+                onClick={() => {
+                  setSettle(false);
+                }}
+              >
+                Settle
+              </div>
+              <div
+                className="flex justify-center items-center w-1/2"
+                onClick={() => {
+                  setSettle(true);
+                }}
+              >
+                Unsettle
+              </div>
+            </div>
+          </CardComponent>
+        </div>
         {paymentDetails.length > 0 ? (
-          <ExpenseDisplayList
-            isVerified={isVerified}
-            paymentDetails={paymentDetails}
-            friendName={userName}
-            friendUID={friendUID}
-          />
+          <div>
+            <ExpenseDisplayList
+              settle={settle}
+              isVerified={isVerified}
+              paymentDetails={paymentDetails}
+              friendName={userName}
+              friendUID={friendUID}
+            />
+          </div>
         ) : (
           ""
         )}
