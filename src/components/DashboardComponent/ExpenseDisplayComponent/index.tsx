@@ -5,7 +5,7 @@ import {
   settleExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { ExpenseInfo } from "../../../store/types";
-import { UID } from "../../../utils/appConstant";
+import { UID } from "../../../utils/constants/appConstant";
 import ButtonComponent from "../../ButtonComponent";
 
 interface ExpenseDisplayProps {

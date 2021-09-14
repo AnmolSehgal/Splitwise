@@ -8,7 +8,7 @@ import {
 import PrimaryButton from "../../../NavbarComponent/PrimaryButtonComponent";
 import FriendInputComponent from "../friendInputComponent";
 import { regExp } from "../../../type";
-import { EMAIL } from "../../../../utils/appConstant";
+import { EMAIL } from "../../../../utils/constants/appConstant";
 interface ModesProps {
   handleModes: (mode: string) => void;
   handleDispaly: () => void;

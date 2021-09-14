@@ -4,9 +4,9 @@ import UserTab from "./UserTab";
 import Profile from "./Profile";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { UID } from "../utils/appConstant";
+import { UID } from "../utils/constants/appConstant";
 
-import { routes } from "../utils/routeConstant";
+import { routes } from "../utils/constants/routeConstant";
 interface RoutesProps {
   path: string | string[];
   Component: React.ComponentType;
@@ -48,6 +48,7 @@ const Routes = () => {
         Component={SignUp}
         exact={true}
       />
+
       <NonProtectedRoutes
         path={routes.SIGN_IN}
         Component={SignIn}

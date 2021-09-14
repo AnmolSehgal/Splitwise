@@ -7,7 +7,7 @@ import {
   addExpenseForUnVerifiedRequest,
   addExpenseRequest,
 } from "../../../../store/actions/expenseActions";
-import { UID, USERNAME } from "../../../../utils/appConstant";
+import { UID, USERNAME } from "../../../../utils/constants/appConstant";
 import ButtonComponent from "../../../ButtonComponent";
 import Input from "../../InputComponent";
 export interface AddExpenseContentState {

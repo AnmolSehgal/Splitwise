@@ -20,7 +20,7 @@ import {
 } from "./store/actions/signInAction";
 import { getFriendsRequest } from "./store/actions/friendAction";
 import AlertComponent from "./components/AlertComponent";
-import { UID } from "./utils/appConstant";
+import { UID } from "./utils/constants/appConstant";
 
 function App() {
   // const userLogin = useSelector(

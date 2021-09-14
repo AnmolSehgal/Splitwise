@@ -1,7 +1,7 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 import { signInAuth } from "../../services/firebase/auth";
-import { EMAIL, UID, USERNAME } from "../../utils/appConstant";
-import { routes } from "../../utils/routeConstant";
+import { EMAIL, UID, USERNAME } from "../../utils/constants/appConstant";
+import { routes } from "../../utils/constants/routeConstant";
 import { showErrorRequest } from "../actions/errorsActions";
 import { getFriendsRequest } from "../actions/friendAction";
 import {

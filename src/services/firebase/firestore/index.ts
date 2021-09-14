@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import { AddExpenseInterface, UserData } from "../../../store/types";
 import { v4 as uuid } from "uuid";
-import { UID } from "../../../utils/appConstant";
+import { UID } from "../../../utils/constants/appConstant";
 
 export async function settingUpUser(
   uid: string,

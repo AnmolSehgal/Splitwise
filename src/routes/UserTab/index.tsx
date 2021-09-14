@@ -6,7 +6,7 @@ import FriendExpenseTab from "../../components/DashboardComponent/FriendExpenseT
 import UserNavbar from "../../components/DashboardComponent/UserSideBar";
 import { GlobalState } from "../../store/types";
 import LoaderComponent from "../../components/LoaderComponent";
-import { routes } from "../../utils/routeConstant";
+import { routes } from "../../utils/constants/routeConstant";
 
 export interface UserTabInterface {
   mode: string;

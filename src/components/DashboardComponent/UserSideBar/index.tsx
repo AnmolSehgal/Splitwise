@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { routes } from "../../../utils/routeConstant";
+import { routes } from "../../../utils/constants/routeConstant";
 import AddFriendModalComponent from "../../ModalComponent/addFriendModal";
 import UserFriendsList from "../UserFriendsList";
 

@@ -1,6 +1,7 @@
+
 import React from "react";
 import invoice from "../../icons/invoice/invoice.png";
-import { USERNAME } from "../../utils/appConstant";
+import { USERNAME } from "../../utils/constants/appConstant";
 import AmountDisplayComponent from "./AmountDisplayComponent";
 
 interface CardComponentProps {

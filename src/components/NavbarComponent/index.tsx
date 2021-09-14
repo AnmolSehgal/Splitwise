@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { signOutRequest } from "../../store/actions/signOut";
 
 import { GlobalState } from "../../store/types";
-import { routes } from "../../utils/routeConstant";
+import { routes } from "../../utils/constants/routeConstant";
 import PrimaryButton from "./PrimaryButtonComponent";
 
 const Navbar = () => {

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Friend } from "../../../../store/types";
-import { UID } from "../../../../utils/appConstant";
+import { UID } from "../../../../utils/constants/appConstant";
 
 interface ExpenseTypeComponentProps {
   friend: Friend;

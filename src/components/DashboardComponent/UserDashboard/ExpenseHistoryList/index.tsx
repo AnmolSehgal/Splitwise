@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../../../store/types";
-import { UID } from "../../../../utils/appConstant";
+import { UID } from "../../../../utils/constants/appConstant";
 import ExpenseTypeComponent from "../ExpenseTypeComponent";
 
 interface CurrentExpenseListProps {

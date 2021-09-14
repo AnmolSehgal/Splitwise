@@ -5,7 +5,7 @@ import {
   settleAllExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { Friend, GlobalState } from "../../../store/types";
-import { UID } from "../../../utils/appConstant";
+import { UID } from "../../../utils/constants/appConstant";
 import ButtonLoaderComponent from "../../ButtonLoaderComponent";
 import CardComponent from "../../CardComponent";
 import AddExpenseModal from "../AddExpenseModal";

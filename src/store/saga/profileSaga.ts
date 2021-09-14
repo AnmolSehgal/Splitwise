@@ -11,7 +11,7 @@ import {
 } from "../actions/profileActions";
 import history from "../history";
 import { signOutFailure, signOutSuccess } from "../actions/signOut";
-import { EMAIL, UID, USERNAME } from "../../utils/appConstant";
+import { EMAIL, UID, USERNAME } from "../../utils/constants/appConstant";
 
 function* updateProfileInfoSaga({
   payload,
