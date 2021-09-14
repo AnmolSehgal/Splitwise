@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import FormComponent from "../../components/formComponents";
+import FormComponent from "../../components/FormComponents_";
 import LoaderComponent from "../../components/LoaderComponent";
 import { formType } from "../../components/type";
 import { showErrorRequest } from "../../store/actions/errorsActions";

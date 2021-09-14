@@ -3,10 +3,10 @@ import { BsX, BsCheck } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import InputComponent from "../../components/inputComponent";
-import ProfileEditComponent from "../../components/profileComponents/profileEditComponent";
-import DisplayComponent from "../../components/profileComponents/displayComponent";
-import PrimaryButton from "../../components/navbarComponent/primaryButtonComponent";
+import InputComponent from "../../components/InputComponent_";
+import ProfileEditComponent from "../../components/ProfileComponents_/ProfileEditComponent";
+import DisplayComponent from "../../components/ProfileComponents_/DisplayComponent";
+import PrimaryButton from "../../components/NavbarComponent_/primaryButtonComponent";
 
 import { GlobalState, ProfileObject } from "../../store/types";
 

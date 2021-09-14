@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router";
-import DashboardComponent from "../../components/dashboardComponent/userDashboard";
-import FriendExpenseTab from "../../components/dashboardComponent/friendExpenseTab";
+import DashboardComponent from "../../components/DashboardComponent_/UserDashboard";
+import FriendExpenseTab from "../../components/DashboardComponent_/FriendExpenseTab";
 
-import UserNavbar from "../../components/dashboardComponent/userSideBar";
+import UserNavbar from "../../components/DashboardComponent_/UserSideBar";
 import { GlobalState } from "../../store/types";
 import LoaderComponent from "../../components/LoaderComponent";
 
