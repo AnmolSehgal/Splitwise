@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   settleAllExpenseForUnVerifiedRequest,
@@ -6,27 +6,38 @@ import {
 } from "../../../store/actions/expenseActions";
 import { Friend, GlobalState } from "../../../store/types";
 import { UID } from "../../../utils/appConstant";
+import ButtonLoaderComponent from "../../ButtonLoaderComponent";
 import CardComponent from "../../CardComponent";
-import PrimaryButton from "../../NavbarComponent/primaryButtonComponent";
 import AddExpenseModal from "../AddExpenseModal";
 import ExpenseDisplayList from "../ExpenseDisplayList";
 
 const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   const [display, setDisplay] = useState(false);
   const [settle, setSettle] = useState(false);
-  const userId = localStorage.getItem(UID);
-  const friendsData = useSelector(
-    (state: GlobalState) => state.friends.friends
+  const [addExpense, setAddExpense] = useState(false);
+  const [settleExpense, setSettleExpense] = useState(false);
+
+  const { friends, isLoader } = useSelector(
+    (state: GlobalState) => state.friends
   );
-  const index = friendsData.findIndex((data) => {
-    return data.friendUID === friendUID;
-  });
   const dispatch = useDispatch();
 
+  const userId = localStorage.getItem(UID);
   let owe = 0,
     owed = 0;
 
-  const paymentDetails = index >= 0 ? friendsData[index].paymentDetails : [];
+  useEffect(() => {
+    if (!isLoader) {
+      setAddExpense(false);
+      setSettleExpense(false);
+    }
+  }, [isLoader]);
+
+  const index = friends.findIndex((data) => {
+    return data.friendUID === friendUID;
+  });
+
+  const paymentDetails = index >= 0 ? friends[index].paymentDetails : [];
 
   paymentDetails.forEach((data) => {
     if (!data.settleStatus) {
@@ -38,23 +49,27 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   return (
     <div className="flex flex-col px-2">
       <div className="flex flex-row w-full justify-end items-center px-2 border-b">
-        <div className="flex flex-row justify-end">
-          <PrimaryButton
-            label="Add expense"
-            onClick={() => {
+        <div className="flex flex-row justify-end items-center pb-2">
+          <ButtonLoaderComponent
+            btnLabel="Add expense"
+            handleOnClick={() => {
               setDisplay(true);
             }}
+            disabled={addExpense}
+            className="mr-2"
           />
-          <PrimaryButton
-            label="Settle all"
-            onClick={() => {
+          <ButtonLoaderComponent
+            btnLabel="Settle all"
+            handleOnClick={() => {
               const userUID = userId as string;
               isVerified
                 ? dispatch(settleAllExpenseRequest(userUID, friendUID))
                 : dispatch(
                     settleAllExpenseForUnVerifiedRequest(userUID, friendUID)
                   );
+              setSettleExpense(true);
             }}
+            disabled={settleExpense}
           />
         </div>
       </div>
@@ -92,10 +107,13 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
             />
           </div>
         ) : (
-          ""
+          <div className="flex justify-center mr-2">No expense to settle</div>
         )}
       </div>
       <AddExpenseModal
+        handleLoader={() => {
+          setAddExpense(true);
+        }}
         display={display}
         friendUID={friendUID}
         friendName={userName}

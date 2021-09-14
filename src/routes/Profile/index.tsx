@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import InputComponent from "../../components/InputComponent";
 import ProfileEditComponent from "../../components/ProfileComponents/ProfileEditComponent";
 import DisplayComponent from "../../components/ProfileComponents/DisplayComponent";
-import PrimaryButton from "../../components/NavbarComponent/primaryButtonComponent";
+import PrimaryButton from "../../components/NavbarComponent/PrimaryButtonComponent";
 
 import { GlobalState, ProfileObject } from "../../store/types";
 

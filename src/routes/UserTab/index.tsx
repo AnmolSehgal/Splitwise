@@ -15,12 +15,36 @@ export interface UserTabInterface {
 const UserTab = () => {
   const { mode, id } = useParams<UserTabInterface>();
 
-  const { friends, isLoader } = useSelector(
-    (state: GlobalState) => state.friends
-  );
-  return isLoader ? (
-    <LoaderComponent />
-  ) : (
+  const { friends } = useSelector((state: GlobalState) => state.friends);
+  // return isLoader ? (
+  //   <LoaderComponent />
+  // ) : (
+  //   <div className="flex justify-center w-screen md:w-full">
+  //     <div className="flex flex-row w-11/12 bg-white justify-evenly border rounded-xl min-h-100 p-3 shadow-xl">
+  //       <div className="flex flex-col w-3/12 border-r">
+  //         <UserNavbar />
+  //       </div>
+  //       <div className="flex flex-col w-9/12">
+  //         {((mode: string) => {
+  //           switch (mode) {
+  //             case "dashboard":
+  //               return <DashboardComponent />;
+  //             case "friend": {
+  //               const index = friends.findIndex((friend) => {
+  //                 return friend.friendUID === id;
+  //               });
+  //               if (index >= 0) return <FriendExpenseTab {...friends[index]} />;
+  //               return;
+  //             }
+  //             default:
+  //               <Redirect to="/dashboard" />;
+  //           }
+  //         })(mode)}
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+  return (
     <div className="flex justify-center w-screen md:w-full">
       <div className="flex flex-row w-11/12 bg-white justify-evenly border rounded-xl min-h-100 p-3 shadow-xl">
         <div className="flex flex-col w-3/12 border-r">

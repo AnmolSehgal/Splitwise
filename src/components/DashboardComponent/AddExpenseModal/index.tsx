@@ -7,11 +7,13 @@ export interface AddExpenseModalState {
   friendUID: string;
   friendName: string;
   isVerified: boolean;
+  handleLoader: () => void;
 }
 
 const AddExpenseModal = ({
   display,
   handleDisplay,
+  handleLoader,
   friendName,
   friendUID,
   isVerified,
@@ -23,6 +25,7 @@ const AddExpenseModal = ({
         friendName={friendName}
         friendUID={friendUID}
         isVerified={isVerified}
+        handleLoader={handleLoader}
       />
     </Modal>
   );

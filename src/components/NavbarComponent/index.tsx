@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { signOutRequest } from "../../store/actions/signOut";
 
 import { GlobalState } from "../../store/types";
-import PrimaryButton from "./primaryButtonComponent";
+import PrimaryButton from "./PrimaryButtonComponent";
 
 const Navbar = () => {
   const userLogin = useSelector(
