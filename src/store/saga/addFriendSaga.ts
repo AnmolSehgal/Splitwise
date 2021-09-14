@@ -12,6 +12,7 @@ import {
   addFriendUsingNameSuccess,
   getFriendsSuccess,
 } from "../actions/friendAction";
+import { loaderRequest, loaderSuccess } from "../actions/loaderAction";
 import actionTypes from "../actionTypes";
 
 function* addFriendUsingEmailSaga({
@@ -38,8 +39,10 @@ function* addFriendUsingNameSaga({
 
 function* getUserFriendsSaga(): Generator {
   try {
+    yield put(loaderRequest());
     const data = yield getUserFriends();
     yield put(getFriendsSuccess(data));
+    yield put(loaderSuccess());
   } catch (error) {
     console.log(error);
   }

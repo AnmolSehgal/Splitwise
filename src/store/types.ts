@@ -35,6 +35,7 @@ export interface GlobalState {
   signUp: SignUpState;
   profile: ProfileStateObject;
   friends: FriendState;
+  loader: LoaderState;
   error: ErrorState;
 }
 
@@ -74,4 +75,7 @@ export interface AddExpenseInterface {
   totalAmount: number;
   friendAmount: number;
   settleStatus: boolean;
+}
+export interface LoaderState {
+  isLoader: boolean;
 }

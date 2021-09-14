@@ -1,22 +1,16 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import FormComponent from "../../components/FormComponents";
-import LoaderComponent from "../../components/LoaderComponent";
 import { formType } from "../../components/type";
 import { signInAuthRequest } from "../../store/actions/signInAction";
-import { GlobalState } from "../../store/types";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const { loading } = useSelector((state: GlobalState) => state.signIn);
   const dispatch = useDispatch();
 
-  return loading ? (
-    <LoaderComponent />
-  ) : (
+  return (
     <FormComponent
       type={formType.signIn}
       email={email}

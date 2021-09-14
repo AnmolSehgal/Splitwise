@@ -9,8 +9,9 @@ import DisplayComponent from "../../components/ProfileComponents/DisplayComponen
 import PrimaryButton from "../../components/NavbarComponent/PrimaryButtonComponent";
 
 import { GlobalState, ProfileObject } from "../../store/types";
-
 import { updateUserInfoRequest } from "../../store/actions/profileActions";
+
+import user from "../../icons/user/user.png";
 
 const Profile = () => {
   const {
@@ -43,7 +44,7 @@ const Profile = () => {
         <div className="flex flex-row justify-evenly flex-wrap">
           <div className="flex flex-col items-center mr-6">
             <img
-              src={userImage}
+              src={userImage ? userImage : user}
               alt="profile"
               className="h-36 w-36 border mb-5 rounded-xl"
             />

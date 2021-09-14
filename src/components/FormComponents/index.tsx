@@ -1,8 +1,11 @@
-import ButtonComponent from "../ButtonComponent";
 import InputComponent from "../InputComponent";
 import { formType } from "../type";
 import signin from "../../icons/auth/signin.svg";
 import signup from "../../icons/auth/signup.svg";
+import ButtonLoaderComponent from "../ButtonLoaderComponent";
+import { useEffect, useState } from "react";
+import { GlobalState } from "../../store/types";
+import { useSelector } from "react-redux";
 interface InputComponentProps {
   type: string;
   name?: string;
@@ -28,6 +31,18 @@ const FormComponent = ({
   confirmPassword,
   onClick,
 }: InputComponentProps) => {
+  const [disabled, setDisabled] = useState(false);
+  const loadSignIn = useSelector((state: GlobalState) => state.signIn.loading);
+  const loadSignUp = useSelector((state: GlobalState) => state.signUp.isLoader);
+
+  useEffect(() => {
+    if (
+      (type === formType.signIn && !loadSignIn) ||
+      (type === formType.signUp && !loadSignUp)
+    )
+      setDisabled(false);
+  }, [loadSignIn, loadSignUp, type]);
+
   return (
     <div className="flex flex-row justify-center items-center my-6 ">
       <div className="flex flex-row w-2/3 justify-center">
@@ -75,10 +90,18 @@ const FormComponent = ({
             ""
           )}
           <div className="flex flex-row justify-center">
-            <ButtonComponent
+            <ButtonLoaderComponent
+              disabled={disabled}
               btnLabel="Submit"
               className=" border text-froly border-froly rounded-xl m-2 text-lg px-2 hover:bg-froly hover:text-white my-3 w-32 h-10 "
-              onClick={onClick}
+              handleOnClick={
+                onClick
+                  ? () => {
+                      onClick();
+                      setDisabled(true);
+                    }
+                  : () => {}
+              }
             />
           </div>
         </div>

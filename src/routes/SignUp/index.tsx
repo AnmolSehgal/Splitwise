@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import FormComponent from "../../components/FormComponents";
-import LoaderComponent from "../../components/LoaderComponent";
+
 import { formType } from "../../components/type";
 import { showErrorRequest } from "../../store/actions/errorsActions";
 import { signUpAuthRequest } from "../../store/actions/signUpAction";
-import { GlobalState } from "../../store/types";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -14,12 +13,9 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const isLoader = useSelector((state: GlobalState) => state.signUp.isLoader);
   const dispatch = useDispatch();
 
-  return isLoader ? (
-    <LoaderComponent />
-  ) : (
+  return (
     <FormComponent
       type={formType.signUp}
       name={name}
