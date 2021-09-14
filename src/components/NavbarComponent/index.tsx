@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { signOutRequest } from "../../store/actions/signOut";
 
 import { GlobalState } from "../../store/types";
+import { routes } from "../../utils/routeConstant";
 import PrimaryButton from "./PrimaryButtonComponent";
 
 const Navbar = () => {
@@ -13,7 +14,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <div className="flex flex-row justify-between items-center mb-6 py-2">
-      <Link to="/dashboard">
+      <Link to={routes.DASHBOARD}>
         <div className=" font-mono font-bold text-gray-700 font ml-2 text-3xl">
           Splitwize
         </div>

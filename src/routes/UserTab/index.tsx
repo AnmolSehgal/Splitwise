@@ -6,6 +6,7 @@ import FriendExpenseTab from "../../components/DashboardComponent/FriendExpenseT
 import UserNavbar from "../../components/DashboardComponent/UserSideBar";
 import { GlobalState } from "../../store/types";
 import LoaderComponent from "../../components/LoaderComponent";
+import { routes } from "../../utils/routeConstant";
 
 export interface UserTabInterface {
   mode: string;
@@ -39,7 +40,7 @@ const UserTab = () => {
                 return;
               }
               default:
-                <Redirect to="/dashboard" />;
+                <Redirect to={routes.DASHBOARD} />;
             }
           })(mode)}
         </div>

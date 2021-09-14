@@ -1,6 +1,7 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 import { signInAuth } from "../../services/firebase/auth";
 import { EMAIL, UID, USERNAME } from "../../utils/appConstant";
+import { routes } from "../../utils/routeConstant";
 import { showErrorRequest } from "../actions/errorsActions";
 import { getFriendsRequest } from "../actions/friendAction";
 import {
@@ -22,7 +23,7 @@ function* signInAuthSaga({
     });
     yield put(signInAuthSuccess());
     yield put(getFriendsRequest());
-    history.push("/dashboard");
+    history.push(routes.DASHBOARD);
   } catch (error: any) {
     yield put(signInAuthFailure());
     yield put(showErrorRequest(error.message));
