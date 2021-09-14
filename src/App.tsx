@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import history from "./store/history";
-import Navbar from "./components/NavbarComponent_";
+import Navbar from "./components/NavbarComponent";
 import Routes from "./routes";
 
 import bgImage from "./icons/background/backgroundImage.svg";
@@ -19,7 +19,7 @@ import {
   userLoginStatusSuccess,
 } from "./store/actions/signInAction";
 import { getFriendsRequest } from "./store/actions/friendAction";
-import AlertComponent from "./components/AlertComponent_";
+import AlertComponent from "./components/AlertComponent";
 import { UID } from "./utils/appConstant";
 
 function App() {
