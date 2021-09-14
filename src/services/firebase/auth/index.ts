@@ -20,6 +20,8 @@ export const signUpAuth = async (
   password: string,
   fullName: string
 ) => {
+  if (!fullName) throw new Error("Please enter user name");
+  if (!email) throw new Error("Please enter user email");
   const userLogin = await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password);

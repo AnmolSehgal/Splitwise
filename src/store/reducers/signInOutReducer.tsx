@@ -14,7 +14,7 @@ import {
 } from "../actions/signOut";
 
 const initState: LoginState = {
-  loginFailed: false,
+  loading: false,
   isLoggedIn: false,
 };
 const signInReducer = (
@@ -31,28 +31,28 @@ const signInReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.LOGIN_AUTH_REQUEST:
-      return { ...state, loginFailed: false, isLoggedIn: false };
+      return { ...state, loading: true, isLoggedIn: false };
 
     case actionTypes.LOGIN_AUTH_SUCCESS:
-      return { ...state, loginFailed: false, isLoggedIn: true };
+      return { ...state, loading: false, isLoggedIn: true };
 
     case actionTypes.LOGIN_AUTH_FAILURE:
-      return { ...state, loginFailed: true, isLoggedIn: false };
+      return { ...state, loading: false, isLoggedIn: false };
 
     case actionTypes.SIGN_OUT_REQUEST:
-      return { ...state, loginFailed: false };
+      return { ...state };
 
     case actionTypes.SIGN_OUT_SUCCESS:
-      return { ...state, loginFailed: false, isLoggedIn: false };
+      return { ...state, isLoggedIn: false, loading: false };
 
     case actionTypes.SIGN_OUT_FAILURE:
-      return { ...state, loginFailed: true };
+      return { ...state };
 
     case actionTypes.USER_LOGIN_STATUS_SUCCESS:
-      return { ...state, loginFailed: false, isLoggedIn: true };
+      return { ...state, loading: false, isLoggedIn: true };
 
     case actionTypes.USER_LOGIN_STATUS_FAILURE:
-      return { ...state, loginFailed: true, isLoggedIn: false };
+      return { ...state, loading: false, isLoggedIn: false };
 
     default:
       return { ...state };

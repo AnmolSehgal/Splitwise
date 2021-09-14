@@ -5,6 +5,7 @@ import {
   settleExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { ExpenseInfo } from "../../../store/types";
+import { UID } from "../../../utils/appConstant";
 import ButtonComponent from "../../buttonComponent";
 
 interface ExpenseDisplayProps {
@@ -22,6 +23,7 @@ const ExpenseDisplay = ({
   isVerified,
   btnLabel,
 }: ExpenseDisplayProps) => {
+  const userId = localStorage.getItem(UID);
   const { title, description, totalAmount, friendAmount, payerUID, expenseId } =
     payment;
   const [showDescription, setShowDescription] = useState(false);
@@ -45,7 +47,7 @@ const ExpenseDisplay = ({
         </div>
         <div className="mx-2">Total amount: Rs {totalAmount}</div>
         <div className="mx-2">
-          {localStorage.getItem("uid") === payerUID
+          {userId === payerUID
             ? `${friendName} owes you : Rs `
             : `you owes ${friendName} : Rs `}
           {friendAmount}
@@ -58,16 +60,12 @@ const ExpenseDisplay = ({
               console.log(isVerified + "---- verified user");
               isVerified
                 ? dispatch(
-                    settleExpenseRequest(
-                      expenseId,
-                      localStorage.getItem("uid") as string,
-                      friendUID
-                    )
+                    settleExpenseRequest(expenseId, userId as string, friendUID)
                   )
                 : dispatch(
                     settleExpenseForUnVerifiedRequest(
                       expenseId,
-                      localStorage.getItem("uid") as string,
+                      userId as string,
                       friendUID
                     )
                   );

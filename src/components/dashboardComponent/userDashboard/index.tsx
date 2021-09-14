@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../../store/types";
+import { UID } from "../../../utils/appConstant";
 import CardComponent from "../../cardComponent";
 import CurrentExpenseList from "./expenseHistoryList";
 
 const DashboardComponent = () => {
   const friends = useSelector((state: GlobalState) => state.friends.friends);
+  const userId = localStorage.getItem(UID);
 
   let owed = 0,
     owe = 0;
   friends.forEach((val) => {
     val.paymentDetails.forEach((val) => {
       if (!val.settleStatus)
-        val.payerUID === localStorage.getItem("uid")
+        val.payerUID === userId
           ? (owed += val.friendAmount)
           : (owe += val.friendAmount);
     });

@@ -34,10 +34,12 @@ import { Friend } from "../types";
 
 export interface FriendState {
   friends: Friend[];
+  isLoader: boolean;
 }
 
 const initState: FriendState = {
   friends: [],
+  isLoader: false,
 };
 
 const friendsReducer = (
@@ -73,43 +75,54 @@ const friendsReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.ADD_FRIEND_USING_NAME_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
+
     case actionTypes.ADD_FRIEND_USING_NAME_SUCCESS:
       return {
         ...state,
+        isLoader: false,
         friends: [...action.payload.friends],
       };
+
     case actionTypes.ADD_FRIEND_USING_NAME_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.ADD_FRIEND_EMAIL_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
+
     case actionTypes.ADD_FRIEND_EMAIL_SUCCESS:
       return {
         ...state,
+        isLoader: false,
         friends: [...action.payload.friends],
       };
     case actionTypes.ADD_FRIEND_EMAIL_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.GET_USER_FRIENDS_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
+
     case actionTypes.GET_USER_FRIENDS_SUCCESS:
       return {
         ...state,
+        isLoader: false,
         friends: [...action.payload.friends],
       };
+
     case actionTypes.GET_USER_FRIENDS_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.ADD_EXPENSE_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
 
     case actionTypes.ADD_EXPENSE_SUCCESS:
       const friendsData = state.friends.map((friend) => friend);
@@ -119,16 +132,18 @@ const friendsReducer = (
       friendsData[index].paymentDetails.push(action.payload.details);
       return {
         ...state,
+        isLoader: false,
         friends: [...friendsData],
       };
 
     case actionTypes.ADD_EXPENSE_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.ADD_EXPENSE_FOR_UNVERIFIED_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
 
     case actionTypes.ADD_EXPENSE_FOR_UNVERIFIED_SUCCESS:
       const friends = state.friends.map((friend) => friend);
@@ -138,16 +153,18 @@ const friendsReducer = (
       friends[idx].paymentDetails.push(action.payload.details);
       return {
         ...state,
+        isLoader: false,
         friends: [...friends],
       };
 
     case actionTypes.ADD_EXPENSE_FOR_UNVERIFIED_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.SETTLE_EXPENSE_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
     case actionTypes.SETTLE_EXPENSE_SUCCESS:
       const data = state.friends.map((friend) => friend);
 
@@ -163,15 +180,17 @@ const friendsReducer = (
         !data[findex].paymentDetails[expIndex].settleStatus;
       return {
         ...state,
+        isLoader: false,
         friends: [...data],
       };
     case actionTypes.SETTLE_EXPENSE_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.SETTLE_EXPENSE_FOR_UNVERIFIED_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
 
     case actionTypes.SETTLE_EXPENSE_FOR_UNVERIFIED_SUCCESS:
       const frienddata = state.friends.map((friend) => friend);
@@ -186,16 +205,18 @@ const friendsReducer = (
         !frienddata[fIdx].paymentDetails[expIdx].settleStatus;
       return {
         ...state,
+        isLoader: false,
         friends: [...frienddata],
       };
 
     case actionTypes.SETTLE_EXPENSE_FOR_UNVERIFIED_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.SETTLE_EXPENSE_ALL_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
     case actionTypes.SETTLE_EXPENSE_ALL_SUCCESS:
       const friend_data = state.friends.map((friend) => friend);
 
@@ -220,15 +241,18 @@ const friendsReducer = (
 
       return {
         ...state,
+        isLoader: false,
         friends: [...friend_data],
       };
+
     case actionTypes.SETTLE_EXPENSE_ALL_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
 
     case actionTypes.SETTLE_EXPENSE_ALL_FOR_UNVERIFIED_REQUEST:
-      return { ...state };
+      return { ...state, isLoader: true };
 
     case actionTypes.SETTLE_EXPENSE_ALL_FOR_UNVERIFIED_SUCCESS:
       const f_data = state.friends.map((friend) => friend);
@@ -253,12 +277,14 @@ const friendsReducer = (
 
       return {
         ...state,
+        isLoader: false,
         friends: [...f_data],
       };
 
     case actionTypes.SETTLE_EXPENSE_ALL_FOR_UNVERIFIED_FAILURE:
       return {
         ...state,
+        isLoader: false,
       };
     default:
       return { ...state };

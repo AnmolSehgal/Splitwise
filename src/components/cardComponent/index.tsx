@@ -1,5 +1,6 @@
 import React from "react";
 import invoice from "../../icons/invoice/invoice.png";
+import { USERNAME } from "../../utils/appConstant";
 import AmountDisplayComponent from "./amountDisplayComponent";
 
 interface CardComponentProps {
@@ -24,7 +25,7 @@ export const CardComponent = ({
           <span className="py-2">
             {friendName
               ? "Friend Name : " + friendName
-              : localStorage.getItem("userName")}
+              : localStorage.getItem(USERNAME)}
           </span>
           <span>total balance : Rs. {owed - owe}</span>
         </div>

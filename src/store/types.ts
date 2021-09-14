@@ -1,12 +1,13 @@
 import { FriendState } from "./reducers/friendsReducer";
 
 export interface LoginState {
-  loginFailed: boolean;
+  loading: boolean;
   isLoggedIn: boolean;
 }
 
 export interface SignUpState {
   signUpFailed: boolean;
+  isLoader: boolean;
 }
 
 export interface ErrorState {

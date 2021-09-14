@@ -8,6 +8,7 @@ import {
 import PrimaryButton from "../../../navbarComponent/primaryButtonComponent";
 import FriendInputComponent from "../friendInputComponent";
 import { regExp } from "../../../type";
+import { EMAIL } from "../../../../utils/appConstant";
 interface ModesProps {
   handleModes: (mode: string) => void;
   handleDispaly: () => void;
@@ -22,7 +23,7 @@ const Modes = ({ handleModes, handleDispaly, mode }: ModesProps) => {
 
   return (() => {
     switch (mode) {
-      case "email":
+      case EMAIL:
         return (
           <FriendInputComponent
             inputLabel={"Enter Email"}
@@ -33,10 +34,7 @@ const Modes = ({ handleModes, handleDispaly, mode }: ModesProps) => {
             inputType="email"
             inputVal={email}
             handleOnClick={() => {
-              if (
-                regExp.test(email) &&
-                email !== localStorage.getItem("email")
-              ) {
+              if (regExp.test(email) && email !== localStorage.getItem(EMAIL)) {
                 dispatch(addFriendUsingEmailRequest(email));
                 setEmail("");
                 handleModes("");
@@ -90,7 +88,7 @@ const Modes = ({ handleModes, handleDispaly, mode }: ModesProps) => {
               label="Add friend using Email"
               className={` p-5 `}
               onClick={() => {
-                handleModes("email");
+                handleModes(EMAIL);
               }}
             />
           </div>

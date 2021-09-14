@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../../../store/types";
+import { UID } from "../../../../utils/appConstant";
 import ExpenseTypeComponent from "../expenseTypeComponent";
 
 interface CurrentExpenseListProps {
@@ -17,13 +18,13 @@ const CurrentExpenseList = ({
 }: CurrentExpenseListProps) => {
   const friends = useSelector((state: GlobalState) => state.friends.friends);
   let count = 0;
+  const userId = localStorage.getItem(UID);
+
   friends.forEach((data) => {
     let amt = 0;
     data.paymentDetails.forEach((val) => {
       if (!val.settleStatus) {
-        amt +=
-          (localStorage.getItem("uid") === val.payerUID ? 1 : -1) *
-          val.friendAmount;
+        amt += (userId === val.payerUID ? 1 : -1) * val.friendAmount;
       }
     });
     if (handleCheck(amt)) {

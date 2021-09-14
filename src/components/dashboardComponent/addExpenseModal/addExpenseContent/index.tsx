@@ -7,6 +7,7 @@ import {
   addExpenseForUnVerifiedRequest,
   addExpenseRequest,
 } from "../../../../store/actions/expenseActions";
+import { UID, USERNAME } from "../../../../utils/appConstant";
 import ButtonComponent from "../../../buttonComponent";
 import Input from "../../input";
 export interface AddExpenseContentState {
@@ -22,8 +23,8 @@ const AddExpenseContent = ({
   isVerified,
   friendName,
 }: AddExpenseContentState) => {
-  const userID = localStorage.getItem("uid");
-  const userName = localStorage.getItem("userName");
+  const userID = localStorage.getItem(UID);
+  const userName = localStorage.getItem(USERNAME);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -95,7 +96,7 @@ const AddExpenseContent = ({
               setPayer(!payer);
             }}
           >
-            {paidBy === localStorage.getItem("uid") ? userName : friendName}
+            {paidBy === userID ? userName : friendName}
           </div>
           {payer ? (
             <div className=" flex flex-col  border shadow-md p-2">

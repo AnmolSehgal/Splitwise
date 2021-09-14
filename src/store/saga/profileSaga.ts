@@ -9,8 +9,9 @@ import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
 } from "../actions/profileActions";
-import history from "../history/history";
+import history from "../history";
 import { signOutFailure, signOutSuccess } from "../actions/signOut";
+import { EMAIL, UID, USERNAME } from "../../utils/appConstant";
 
 function* updateProfileInfoSaga({
   payload,
@@ -27,9 +28,9 @@ function* signOutSaga(): Generator {
   try {
     yield userSignOut();
     yield put(signOutSuccess());
-    localStorage.removeItem("uid");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userName");
+    localStorage.removeItem(UID);
+    localStorage.removeItem(EMAIL);
+    localStorage.removeItem(USERNAME);
     history.push("/SignIn");
   } catch (error) {
     yield put(signOutFailure());

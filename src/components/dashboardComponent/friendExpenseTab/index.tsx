@@ -5,6 +5,7 @@ import {
   settleAllExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { Friend, GlobalState } from "../../../store/types";
+import { UID } from "../../../utils/appConstant";
 import CardComponent from "../../cardComponent";
 import PrimaryButton from "../../navbarComponent/primaryButtonComponent";
 import AddExpenseModal from "../addExpenseModal";
@@ -13,7 +14,7 @@ import ExpenseDisplayList from "../expensDisplayList";
 const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   const [display, setDisplay] = useState(false);
   const [settle, setSettle] = useState(false);
-
+  const userId = localStorage.getItem(UID);
   const friendsData = useSelector(
     (state: GlobalState) => state.friends.friends
   );
@@ -29,8 +30,7 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
 
   paymentDetails.forEach((data) => {
     if (!data.settleStatus) {
-      if (data.payerUID === localStorage.getItem("uid"))
-        owed += data.friendAmount;
+      if (data.payerUID === userId) owed += data.friendAmount;
       else owe += data.friendAmount;
     }
   });
@@ -48,7 +48,7 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
           <PrimaryButton
             label="Settle all"
             onClick={() => {
-              const userUID = localStorage.getItem("uid") as string;
+              const userUID = userId as string;
               isVerified
                 ? dispatch(settleAllExpenseRequest(userUID, friendUID))
                 : dispatch(

@@ -3,15 +3,16 @@ import UserTab from "./userTab";
 import Profile from "./profile";
 import SignIn from "./signIn";
 import SignUp from "./signUp";
+import { UID } from "../utils/appConstant";
 
 interface RoutesProps {
-  path: string;
+  path: string | string[];
   Component: React.ComponentType;
   exact: boolean;
 }
 
 const ProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
-  const userUID = localStorage.getItem("uid");
+  const userUID = localStorage.getItem(UID);
   return (
     <Route
       path={path}
@@ -24,7 +25,7 @@ const ProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
 };
 
 const NonProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
-  const userUID = localStorage.getItem("uid");
+  const userUID = localStorage.getItem(UID);
 
   return (
     <Route
@@ -40,8 +41,16 @@ const NonProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
 const Routes = () => {
   return (
     <Switch>
-      <NonProtectedRoutes path="/SignUp" Component={SignUp} exact={true} />
-      <NonProtectedRoutes path="/SignIn" Component={SignIn} exact={true} />
+      <NonProtectedRoutes
+        path={["/SignUp", "/"]}
+        Component={SignUp}
+        exact={true}
+      />
+      <NonProtectedRoutes
+        path={["/SignIn", "/"]}
+        Component={SignIn}
+        exact={true}
+      />
       <ProtectedRoutes path="/profile" exact={true} Component={Profile} />
       <ProtectedRoutes path="/:mode/:id?" Component={UserTab} exact={false} />
     </Switch>

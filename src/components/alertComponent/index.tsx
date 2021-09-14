@@ -11,13 +11,15 @@ const AlertComponent = () => {
   const dispatch = useDispatch();
 
   return showError ? (
-    <div className="flex justify-evenly text-xl text-white items-center absolute top-0 w-screen bg-malibu rounded-b ">
-      <div>{errorMessage}</div>
-      <BsX
-        onClick={() => {
-          dispatch(hideErrorRequest());
-        }}
-      />
+    <div className="flex justify-center absolute top-4 w-full">
+      <div className="flex w-1/2 justify-between px-4 text-xl text-white items-center bg-malibu rounded-xl">
+        <div className="mr-4">{errorMessage}</div>
+        <BsX
+          onClick={() => {
+            dispatch(hideErrorRequest());
+          }}
+        />
+      </div>
     </div>
   ) : null;
 };

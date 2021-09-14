@@ -5,7 +5,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import history from "./store/history/history";
+import history from "./store/history";
 import Navbar from "./components/navbarComponent";
 import Routes from "./routes";
 
@@ -20,6 +20,7 @@ import {
 } from "./store/actions/signInAction";
 import { getFriendsRequest } from "./store/actions/friendAction";
 import AlertComponent from "./components/alertComponent";
+import { UID } from "./utils/appConstant";
 
 function App() {
   // const userLogin = useSelector(
@@ -42,7 +43,7 @@ function App() {
         dispatch(signOutRequest());
       }
     });
-    if (localStorage.getItem("uid")) {
+    if (localStorage.getItem(UID)) {
       dispatch(userLoginStatusSuccess());
       dispatch(getFriendsRequest());
     } else dispatch(userLoginStatusFailure());

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import history from "../../../../store/history/history";
+import history from "../../../../store/history";
 import { GlobalState } from "../../../../store/types";
 
 const FriendsList = () => {

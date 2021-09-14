@@ -5,6 +5,7 @@ import FriendExpenseTab from "../../components/dashboardComponent/friendExpenseT
 
 import UserNavbar from "../../components/dashboardComponent/userSideBar";
 import { GlobalState } from "../../store/types";
+import LoaderComponent from "../../components/LoaderComponent";
 
 export interface UserTabInterface {
   mode: string;
@@ -13,8 +14,13 @@ export interface UserTabInterface {
 
 const UserTab = () => {
   const { mode, id } = useParams<UserTabInterface>();
-  const { friends } = useSelector((state: GlobalState) => state.friends);
-  return (
+
+  const { friends, isLoader } = useSelector(
+    (state: GlobalState) => state.friends
+  );
+  return isLoader ? (
+    <LoaderComponent />
+  ) : (
     <div className="flex justify-center w-screen md:w-full">
       <div className="flex flex-row w-11/12 bg-white justify-evenly border rounded-xl min-h-100 p-3 shadow-xl">
         <div className="flex flex-col w-3/12 border-r">

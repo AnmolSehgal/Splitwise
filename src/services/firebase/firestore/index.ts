@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import { AddExpenseInterface, UserData } from "../../../store/types";
 import { v4 as uuid } from "uuid";
+import { UID } from "../../../utils/appConstant";
 
 export async function settingUpUser(
   uid: string,
@@ -21,7 +22,7 @@ export async function userValid(email: string) {
 export async function addFriendUsingEmail(email: string) {
   const db = await firebase.firestore().collection("/userDetails");
   const userData = (await (
-    await db.doc(localStorage.getItem("uid") as string).get()
+    await db.doc(localStorage.getItem(UID) as string).get()
   ).data()) as UserData;
 
   const data = await (await db.get()).docs;
@@ -36,7 +37,7 @@ export async function addFriendUsingEmail(email: string) {
       return data.friendUID === friendData.uid;
     }) < 0
   ) {
-    await db.doc(localStorage.getItem("uid") as string).update({
+    await db.doc(localStorage.getItem(UID) as string).update({
       friends: firebase.firestore.FieldValue.arrayUnion({
         userName: friendData.userName,
         paymentDetails: [],
@@ -49,23 +50,20 @@ export async function addFriendUsingEmail(email: string) {
         userName: userData.userName,
         paymentDetails: [],
         isVerified: true,
-        friendUID: localStorage.getItem("uid"),
+        friendUID: localStorage.getItem(UID),
       }),
     });
+  } else {
+    throw new Error("Friend already exists.");
   }
-  return (await db.doc(localStorage.getItem("uid") as string).get()).data();
-  //if (
-  //   userData.friends.findIndex((data) => {
-  //     return data.friendUID === friendData.uid;
-  //   }) < 0
-  // )
-  //   throw new Error("UserExist");
+
+  return (await db.doc(localStorage.getItem(UID) as string).get()).data();
 }
 
 export async function addFriendUsingName(name: string) {
   const uid = uuid();
   const db = await firebase.firestore().collection("/userDetails");
-  await db.doc(localStorage.getItem("uid") as string).update({
+  await db.doc(localStorage.getItem(UID) as string).update({
     friends: firebase.firestore.FieldValue.arrayUnion({
       userName: name,
       isVerified: false,
@@ -74,14 +72,14 @@ export async function addFriendUsingName(name: string) {
     }),
   });
   return (await (
-    await db.doc(localStorage.getItem("uid") as string).get()
+    await db.doc(localStorage.getItem(UID) as string).get()
   ).data()) as UserData;
 }
 
 export async function getUserFriends() {
   const db = await firebase.firestore().collection("/userDetails");
   return (await (
-    await db.doc(localStorage.getItem("uid") as string).get()
+    await db.doc(localStorage.getItem(UID) as string).get()
   ).data()) as UserData;
 }
 

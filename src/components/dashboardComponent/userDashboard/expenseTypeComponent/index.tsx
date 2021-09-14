@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Friend } from "../../../../store/types";
+import { UID } from "../../../../utils/appConstant";
 
 interface ExpenseTypeComponentProps {
   friend: Friend;
@@ -15,7 +16,7 @@ const ExpenseTypeComponent = ({
   friend.paymentDetails.forEach((data) => {
     if (!data.settleStatus) {
       amount +=
-        data.payerUID === localStorage.getItem("uid")
+        data.payerUID === localStorage.getItem(UID)
           ? data.friendAmount
           : -1 * data.friendAmount;
     }

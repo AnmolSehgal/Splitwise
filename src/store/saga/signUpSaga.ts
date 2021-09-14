@@ -1,5 +1,7 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 import { signUpAuth } from "../../services/firebase/auth";
+import { EMAIL, UID, USERNAME } from "../../utils/appConstant";
+import { showErrorRequest } from "../actions/errorsActions";
 import {} from "../actions/signInAction";
 import {
   signUpAuthFailure,
@@ -7,7 +9,7 @@ import {
   signUpAuthSuccess,
 } from "../actions/signUpAction";
 import actionTypes from "../actionTypes";
-import history from "../history/history";
+import history from "../history";
 
 function* signUpAuthSaga({
   payload,
@@ -15,16 +17,17 @@ function* signUpAuthSaga({
   try {
     yield signUpAuth(payload.email, payload.password, payload.name).then(
       (data) => {
-        localStorage.setItem("uid", data.uid as string);
-        localStorage.setItem("userName", data.userName as string);
-        localStorage.setItem("email", data.email as string);
+        localStorage.setItem(UID, data.uid as string);
+        localStorage.setItem(USERNAME, data.userName as string);
+        localStorage.setItem(EMAIL, data.email as string);
       }
     );
     yield put(signUpAuthSuccess());
-    history.push("user/dashboard");
-  } catch (error) {
-    //console.log(error);
+    history.push("/dashboard");
+  } catch (error: any) {
+    console.log(error);
     yield put(signUpAuthFailure());
+    yield put(showErrorRequest(error.message));
   }
 }
 
