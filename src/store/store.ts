@@ -8,11 +8,12 @@ import rootSaga from "./saga";
 import history from "./history";
 
 const sagaMiddleWare = createSagaMiddleware();
+const middleWares = [sagaMiddleWare, routerMiddleware(history)];
 
-const store = createStore(
-  combineReducer,
-  applyMiddleware(logger, sagaMiddleWare, routerMiddleware(history))
-);
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development")
+  middleWares.push(logger);
+
+const store = createStore(combineReducer, applyMiddleware(...middleWares));
 
 sagaMiddleWare.run(rootSaga);
 
