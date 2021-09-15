@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import FormComponent from "../../components/FormComponents";
-import { formType } from "../../components/type";
+import { formType } from "../../utils/constants/appConstant";
 import { signInAuthRequest } from "../../store/actions/signInAction";
 
 const SignIn = () => {

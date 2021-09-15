@@ -12,17 +12,27 @@ import {
   addFriendUsingNameSuccess,
   getFriendsSuccess,
 } from "../actions/friendAction";
-import { loaderRequest, loaderSuccess } from "../actions/loaderAction";
+import {
+  friendListLoaderFailure,
+  friendListLoaderRequest,
+  friendListLoaderSuccess,
+  loaderFailure,
+  loaderRequest,
+  loaderSuccess,
+} from "../actions/loaderAction";
 import actionTypes from "../actionTypes";
 
 function* addFriendUsingEmailSaga({
   payload,
 }: ReturnType<typeof addFriendUsingEmailRequest>): Generator {
   try {
+    yield put(friendListLoaderRequest());
     const data = yield addFriendUsingEmail(payload.email);
     yield put(addFriendUsingEmailSuccess(data));
+    yield put(friendListLoaderSuccess());
   } catch (error) {
     yield put(showErrorRequest("Enter a Valid user email"));
+    yield put(friendListLoaderFailure());
   }
 }
 
@@ -30,10 +40,13 @@ function* addFriendUsingNameSaga({
   payload,
 }: ReturnType<typeof addFriendUsingNameRequest>): Generator {
   try {
+    yield put(friendListLoaderRequest());
     const data = yield addFriendUsingName(payload.userName);
     yield put(addFriendUsingNameSuccess(data));
+    yield put(friendListLoaderSuccess());
   } catch (error) {
     console.log(error);
+    yield put(friendListLoaderFailure());
   }
 }
 
@@ -45,6 +58,7 @@ function* getUserFriendsSaga(): Generator {
     yield put(loaderSuccess());
   } catch (error) {
     console.log(error);
+    put(loaderFailure());
   }
 }
 

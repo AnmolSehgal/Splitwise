@@ -78,4 +78,5 @@ export interface AddExpenseInterface {
 }
 export interface LoaderState {
   isLoader: boolean;
+  friendListLoader: boolean;
 }

@@ -17,3 +17,21 @@ export const loaderFailure = () => {
     type: actionTypes.LOADER_FAILURE,
   };
 };
+
+export const friendListLoaderRequest = () => {
+  return {
+    type: actionTypes.FRIEND_LIST_LOADER_REQUEST,
+  };
+};
+
+export const friendListLoaderSuccess = () => {
+  return {
+    type: actionTypes.FRIEND_LIST_LOADER_SUCCESS,
+  };
+};
+
+export const friendListLoaderFailure = () => {
+  return {
+    type: actionTypes.FRIEND_LIST_LOADER_FAILURE,
+  };
+};

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import FormComponent from "../../components/FormComponents";
 
-import { formType } from "../../components/type";
+import { formType } from "../../utils/constants/appConstant";
 import { showErrorRequest } from "../../store/actions/errorsActions";
 import { signUpAuthRequest } from "../../store/actions/signUpAction";
 

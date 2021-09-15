@@ -7,7 +7,7 @@ import {
 } from "../../../../store/actions/friendAction";
 import PrimaryButton from "../../../NavbarComponent/PrimaryButtonComponent";
 import FriendInputComponent from "../friendInputComponent";
-import { regExp } from "../../../type";
+import { regExp } from "../../../../utils/constants/appConstant";
 import { EMAIL } from "../../../../utils/constants/appConstant";
 interface ModesProps {
   handleModes: (mode: string) => void;
