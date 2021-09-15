@@ -197,7 +197,6 @@ const AddExpenseContent = ({
             className=" border border-froly py-2 px-3 rounded-xl text-froly hover:bg-froly hover:text-white "
             onClick={() => {
               handleDisplay();
-              handleLoader();
               const totalAmount = parseInt(amount);
               if (totalAmount > 0) {
                 let payerAmountNum, friendAmountNum;

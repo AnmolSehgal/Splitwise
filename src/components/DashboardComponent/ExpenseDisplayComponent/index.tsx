@@ -41,10 +41,10 @@ const ExpenseDisplay = ({
     <div className=" flex flex-col border shadow-md rounded-xl bg-froly-400 text-gray-50 mx-2 my-3 px-3 font-mono ">
       <div className="flex flex-row items-center py-2 justify-between ">
         <div className="flex flex-col mr-2 items-center">
-          <div className="text-lg">{expenseDate.getUTCDate()}</div>
-          <div className="text-sm">
-            {months[expenseDate.getMonth()] + "," + expenseDate.getFullYear()}
+          <div className="text-lg">
+            {months[expenseDate.getMonth()] + " " + expenseDate.getUTCDate()}
           </div>
+          <div className="text-sm">{expenseDate.getFullYear()}</div>
         </div>
         <div className="flex flex-col mr-2">
           <div className="text-lg mr-2">{title}</div>
