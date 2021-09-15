@@ -24,6 +24,7 @@ function* signUpAuthSaga({
       }
     );
     yield put(signUpAuthSuccess());
+    yield put(signUpAuthSuccess());
     history.push(routes.DASHBOARD);
   } catch (error: any) {
     console.log(error);
