@@ -20,7 +20,10 @@ const ProtectedRoutes = ({ path, Component, exact }: RoutesProps) => {
       path={path}
       exact={exact}
       render={() => {
-        return userUID ? <Component /> : <Redirect to={routes.SIGN_IN} />;
+        console.log(path);
+        if (path !== routes.SIGN_UP)
+          return userUID ? <Component /> : <Redirect to={routes.SIGN_IN} />;
+        else return <Redirect to={routes.SIGN_UP} />;
       }}
     />
   );
