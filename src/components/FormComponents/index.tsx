@@ -3,9 +3,7 @@ import { formType } from "../../utils/constants/appConstant";
 import signin from "../../icons/auth/signin.svg";
 import signup from "../../icons/auth/signup.svg";
 import ButtonLoaderComponent from "../ButtonLoaderComponent";
-import { useEffect, useState } from "react";
-import { GlobalState } from "../../store/types";
-import { useSelector } from "react-redux";
+
 interface InputComponentProps {
   type: string;
   name?: string;
@@ -17,6 +15,7 @@ interface InputComponentProps {
   confirmPassword?: string;
   changeConfirmPassword?: (val: string) => void;
   onClick?: () => void;
+  disabled: boolean;
 }
 
 const FormComponent = ({
@@ -30,19 +29,8 @@ const FormComponent = ({
   password,
   confirmPassword,
   onClick,
+  disabled,
 }: InputComponentProps) => {
-  const [disabled, setDisabled] = useState(false);
-  const loadSignIn = useSelector((state: GlobalState) => state.signIn.loading);
-  const loadSignUp = useSelector((state: GlobalState) => state.signUp.isLoader);
-
-  useEffect(() => {
-    if (
-      (type === formType.signIn && !loadSignIn) ||
-      (type === formType.signUp && !loadSignUp)
-    )
-      setDisabled(false);
-  }, [loadSignIn, loadSignUp, type]);
-
   return (
     <div className="flex flex-row justify-center items-center my-6 ">
       <div className="flex flex-row w-2/3 justify-center">
@@ -53,7 +41,12 @@ const FormComponent = ({
             className="h-96 m-2"
           />
         </div>
-        <form className="flex flex-col py-3 px-5 w-11/12 md:w-96 border rounded-xl shadow-md bg-white">
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+          className="flex flex-col py-3 px-5 w-11/12 md:w-96 border rounded-xl shadow-md bg-white"
+        >
           <div className="flex flex-row justify-center text-3xl mb-3 border-b py-1 w-full min-h-16">
             <span className="text-gray-700">
               {type === formType.signIn ? "SignIn" : "Sign Up"}
@@ -98,7 +91,6 @@ const FormComponent = ({
                 onClick
                   ? () => {
                       onClick();
-                      setDisabled(true);
                     }
                   : () => {}
               }

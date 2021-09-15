@@ -7,7 +7,6 @@ import {
 } from "../actions/signUpAction";
 
 const initState: SignUpState = {
-  signUpFailed: false,
   isLoader: false,
 };
 const signUpReducer = (
@@ -19,11 +18,11 @@ const signUpReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.SIGN_UP_AUTH_REQUEST:
-      return { ...state, signUpFailed: false, isLoader: true };
+      return { ...state, isLoader: true };
     case actionTypes.SIGN_UP_AUTH_SUCCESS:
-      return { ...state, signUpFailed: false, isLoader: false };
+      return { ...state, isLoader: false };
     case actionTypes.SIGN_UP_AUTH_FAILURE:
-      return { ...state, signUpFailed: true, isLoader: false };
+      return { ...state, isLoader: false };
     default:
       return { ...state };
   }

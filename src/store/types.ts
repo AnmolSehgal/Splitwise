@@ -6,7 +6,6 @@ export interface LoginState {
 }
 
 export interface SignUpState {
-  signUpFailed: boolean;
   isLoader: boolean;
 }
 
