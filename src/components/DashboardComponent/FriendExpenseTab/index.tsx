@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { showErrorRequest } from "../../../store/actions/errorsActions";
 import {
   settleAllExpenseForUnVerifiedRequest,
   settleAllExpenseRequest,
@@ -40,7 +41,9 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   });
 
   const paymentDetails = index >= 0 ? friends[index].paymentDetails : [];
-
+  const countExpense = paymentDetails.filter(
+    (data) => data.settleStatus === false
+  ).length;
   paymentDetails.forEach((data) => {
     if (!data.settleStatus) {
       if (data.payerUID === userId) owed += data.friendAmount;
@@ -64,12 +67,14 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
             btnLabel="Settle all"
             handleOnClick={() => {
               const userUID = userId as string;
-              isVerified
-                ? dispatch(settleAllExpenseRequest(userUID, friendUID))
-                : dispatch(
-                    settleAllExpenseForUnVerifiedRequest(userUID, friendUID)
-                  );
-              setSettleExpense(true);
+              if (paymentDetails.length > 0 && countExpense > 0) {
+                isVerified
+                  ? dispatch(settleAllExpenseRequest(userUID, friendUID))
+                  : dispatch(
+                      settleAllExpenseForUnVerifiedRequest(userUID, friendUID)
+                    );
+                setSettleExpense(true);
+              } else dispatch(showErrorRequest("There is nothing to settle."));
             }}
             disabled={settleExpense}
           />
