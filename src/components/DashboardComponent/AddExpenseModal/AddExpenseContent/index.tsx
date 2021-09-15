@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BsX } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import bill from "../../../../icons/bill/bill.svg";
+import { showErrorRequest } from "../../../../store/actions/errorsActions";
 
 import {
   addExpenseForUnVerifiedRequest,
@@ -34,8 +35,8 @@ const AddExpenseContent = ({
   const [paidBy, setPaidBy] = useState(userID);
   const [payer, setPayer] = useState(false);
   const [splitMode, setSplitMode] = useState("equality");
-  const [payerFraction, setPayerFraction] = useState("0");
-  const [friendFraction, setFriendFraction] = useState("100");
+  const [payerFraction, setPayerFraction] = useState("50");
+  const [friendFraction, setFriendFraction] = useState("50");
   const dispatch = useDispatch();
 
   const clearState = () => {
@@ -45,8 +46,8 @@ const AddExpenseContent = ({
     setPaidBy(userID);
     setPayer(false);
     setSplitMode("equality");
-    setPayerFraction("");
-    setFriendFraction("");
+    setPayerFraction("50");
+    setFriendFraction("50");
   };
   return (
     <div className="flex flex-col w-1/2 border border-gray-400 rounded-xl bg-white  font-mono">
@@ -85,7 +86,9 @@ const AddExpenseContent = ({
             inputVal={amount}
             inputType="number"
             handleOnChange={(val) => {
-              if (val === null || parseInt(val) >= 0) setAmount(val);
+              if (!val) {
+                setAmount("0");
+              } else if (parseInt(val) >= 0) setAmount("" + parseInt(val));
             }}
           />
         </div>
@@ -207,7 +210,7 @@ const AddExpenseContent = ({
                   friendAmountNum =
                     (totalAmount * parseInt(friendFraction)) / 100;
                 }
-                if (isVerified)
+                if (isVerified) {
                   dispatch(
                     addExpenseRequest(
                       {
@@ -222,7 +225,8 @@ const AddExpenseContent = ({
                       friendUID
                     )
                   );
-                else
+                  handleLoader();
+                } else {
                   dispatch(
                     addExpenseForUnVerifiedRequest(
                       {
@@ -237,7 +241,9 @@ const AddExpenseContent = ({
                       friendUID
                     )
                   );
-              }
+                  handleLoader();
+                }
+              } else dispatch(showErrorRequest("Please enter a valid amount"));
               clearState();
             }}
           />

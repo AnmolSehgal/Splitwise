@@ -8,6 +8,7 @@ import { Friend, GlobalState } from "../../../store/types";
 import { UID } from "../../../utils/constants/appConstant";
 import ButtonLoaderComponent from "../../ButtonLoaderComponent";
 import CardComponent from "../../CardComponent";
+import MdLoaderComponent from "../../LoaderComponent/MdLoaderComponent";
 import AddExpenseModal from "../AddExpenseModal";
 import ExpenseDisplayList from "../ExpenseDisplayList";
 
@@ -20,6 +21,7 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
   const { friends, isLoader } = useSelector(
     (state: GlobalState) => state.friends
   );
+
   const dispatch = useDispatch();
 
   const userId = localStorage.getItem(UID);
@@ -96,18 +98,26 @@ const FriendExpenseTab = ({ friendUID, userName, isVerified }: Friend) => {
             </div>
           </CardComponent>
         </div>
+        <div className="border-b  text-gray-700 text-lg">Details</div>
         {paymentDetails.length > 0 ? (
           <div>
-            <ExpenseDisplayList
-              settle={settle}
-              isVerified={isVerified}
-              paymentDetails={paymentDetails}
-              friendName={userName}
-              friendUID={friendUID}
-            />
+            <div>
+              <ExpenseDisplayList
+                settle={settle}
+                isVerified={isVerified}
+                paymentDetails={paymentDetails}
+                friendName={userName}
+                friendUID={friendUID}
+              />
+            </div>
+            {isLoader ? <MdLoaderComponent /> : null}
           </div>
+        ) : isLoader ? (
+          <MdLoaderComponent />
         ) : (
-          <div className="flex justify-center mr-2">No expense to settle</div>
+          <div className="flex justify-center mr-2 mt-2 font-mono text-gray-700">
+            No expense to settle
+          </div>
         )}
       </div>
       <AddExpenseModal

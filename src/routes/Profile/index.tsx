@@ -12,6 +12,7 @@ import { GlobalState, ProfileObject } from "../../store/types";
 import { updateUserInfoRequest } from "../../store/actions/profileActions";
 
 import user from "../../icons/user/user.png";
+import LoaderComponent from "../../components/LoaderComponent";
 
 const Profile = () => {
   const {
@@ -37,7 +38,11 @@ const Profile = () => {
   const [prevPassword, setPrevPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  return (
+  const { isLoader } = useSelector((state: GlobalState) => state.friends);
+
+  return isLoader ? (
+    <LoaderComponent />
+  ) : (
     <div className="flex justify-center items-center">
       <div className="flex flex-col p-2 border rounded-lg w-11/12 md:w-1/2 shadow-md">
         <div className="text-3xl mb-4 py-1 border-b">Profile</div>

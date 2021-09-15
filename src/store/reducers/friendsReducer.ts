@@ -236,6 +236,7 @@ const friendsReducer = (
           friendAmount: data.friendAmount,
           totalAmount: data.totalAmount,
           settleStatus: true,
+          date: data.date,
         };
       });
 
@@ -271,6 +272,7 @@ const friendsReducer = (
             friendAmount: data.friendAmount,
             totalAmount: data.totalAmount,
             settleStatus: true,
+            date: data.date,
           };
         }
       );

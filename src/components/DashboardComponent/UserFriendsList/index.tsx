@@ -1,7 +1,8 @@
 import { RiAddLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { GlobalState } from "../../../store/types";
-import SmallLoaderComponent from "../../ButtonLoaderComponent/SmallLoaderComponent";
+
+import MdLoaderComponent from "../../LoaderComponent/MdLoaderComponent";
 import FriendsList from "./FriendsList";
 export interface userFriendsProps {
   handleChange: () => void;
@@ -20,13 +21,8 @@ const UserFriendsList = ({ handleChange }: userFriendsProps) => {
           <RiAddLine className=" text-froly text-2xl" />
         </button>
       </div>
-      {friendListLoader ? (
-        <div className="flex justify-center items-center py-5">
-          <SmallLoaderComponent />
-        </div>
-      ) : (
-        <FriendsList />
-      )}
+      <FriendsList />
+      {friendListLoader ? <MdLoaderComponent /> : null}
     </div>
   );
 };

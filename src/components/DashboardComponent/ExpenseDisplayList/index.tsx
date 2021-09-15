@@ -22,8 +22,7 @@ const ExpenseDisplayList = ({
   });
 
   return (
-    <div className="flex flex-col h-96 overflow-y-scroll">
-      <div className="border-b  text-gray-700 text-lg">Details</div>
+    <div className="flex flex-col h-72 overflow-y-scroll">
       {count === 0 ? (
         <div className="flex flex-row justify-center text-gray-700 text-lg py-3">
           There is nothing to {settle ? "unsettle" : "settle"}

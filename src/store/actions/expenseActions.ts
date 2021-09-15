@@ -26,6 +26,7 @@ export const addExpenseRequest = (
       settleStatus: false,
       userUID: userUID,
       friendUID: friendUID,
+      date: Number(new Date()),
     },
   };
 };
@@ -40,6 +41,7 @@ export const addExpenseSuccess = ({
   totalAmount,
   friendAmount,
   settleStatus,
+  date,
 }: AddExpenseInterface) => {
   return {
     type: actionTypes.ADD_EXPENSE_SUCCESS,
@@ -54,6 +56,7 @@ export const addExpenseSuccess = ({
         totalAmount: totalAmount,
         friendAmount: friendAmount,
         settleStatus: settleStatus,
+        date: date,
       },
       friendUID: friendUID,
     },
@@ -87,6 +90,7 @@ export const addExpenseForUnVerifiedRequest = (
       settleStatus: false,
       userUID: userUID,
       friendUID: friendUID,
+      date: Number(new Date()),
     },
   };
 };
@@ -101,6 +105,7 @@ export const addExpenseForUnVerifiedSuccess = ({
   totalAmount,
   friendAmount,
   settleStatus,
+  date,
 }: AddExpenseInterface) => {
   return {
     type: actionTypes.ADD_EXPENSE_FOR_UNVERIFIED_SUCCESS,
@@ -115,6 +120,7 @@ export const addExpenseForUnVerifiedSuccess = ({
         totalAmount: totalAmount,
         friendAmount: friendAmount,
         settleStatus: settleStatus,
+        date: date,
       },
       friendUID: friendUID,
     },

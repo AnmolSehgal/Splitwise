@@ -48,6 +48,7 @@ export interface ExpenseInfo {
   payerAmount: number;
   totalAmount: number;
   friendAmount: number;
+  date: Number;
 }
 
 export interface UserData {
@@ -75,6 +76,7 @@ export interface AddExpenseInterface {
   totalAmount: number;
   friendAmount: number;
   settleStatus: boolean;
+  date: Number;
 }
 export interface LoaderState {
   isLoader: boolean;

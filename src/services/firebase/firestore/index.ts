@@ -94,6 +94,7 @@ export async function addExpense({
   totalAmount,
   friendAmount,
   settleStatus,
+  date,
 }: AddExpenseInterface) {
   const db = await firebase.firestore().collection("/userDetails");
   const userData = (await db.doc(userUID).get()).data() as UserData;
@@ -106,6 +107,7 @@ export async function addExpense({
     totalAmount: totalAmount,
     friendAmount: friendAmount,
     settleStatus: settleStatus,
+    date: date,
   };
   const index = userData.friends.findIndex((friend) => {
     return friendUID === friend.friendUID;
@@ -134,6 +136,7 @@ export async function addExpenseForUnVerfiedUser({
   totalAmount,
   friendAmount,
   settleStatus,
+  date,
 }: AddExpenseInterface) {
   const db = await firebase.firestore().collection("/userDetails");
   const userData = (await db.doc(userUID).get()).data() as UserData;
@@ -146,6 +149,7 @@ export async function addExpenseForUnVerfiedUser({
     totalAmount: totalAmount,
     friendAmount: friendAmount,
     settleStatus: settleStatus,
+    date: date,
   };
   const index = userData.friends.findIndex((friend) => {
     return friendUID === friend.friendUID;
@@ -240,6 +244,7 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
       friendAmount: data.friendAmount,
       totalAmount: data.totalAmount,
       settleStatus: true,
+      date: data.date,
     };
   });
 
@@ -255,6 +260,7 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
       friendAmount: data.friendAmount,
       totalAmount: data.totalAmount,
       settleStatus: true,
+      date: data.date,
     };
   });
 
@@ -270,9 +276,9 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
       friendAmount: data.friendAmount,
       totalAmount: data.totalAmount,
       settleStatus: true,
+      date: data.date,
     };
   });
-
   friendData.friends[fIndex].paymentDetails = friendData.friends[
     fIndex
   ].paymentDetails.map((data) => {
@@ -285,6 +291,7 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
       friendAmount: data.friendAmount,
       totalAmount: data.totalAmount,
       settleStatus: true,
+      date: data.date,
     };
   });
 
@@ -314,6 +321,7 @@ export async function settleAllExpenseForUnVerfiedUser(
       friendAmount: data.friendAmount,
       totalAmount: data.totalAmount,
       settleStatus: true,
+      date: data.date,
     };
   });
 

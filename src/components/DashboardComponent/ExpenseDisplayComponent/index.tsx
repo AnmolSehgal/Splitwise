@@ -5,7 +5,7 @@ import {
   settleExpenseRequest,
 } from "../../../store/actions/expenseActions";
 import { ExpenseInfo } from "../../../store/types";
-import { UID } from "../../../utils/constants/appConstant";
+import { months, UID } from "../../../utils/constants/appConstant";
 import ButtonComponent from "../../ButtonComponent";
 
 interface ExpenseDisplayProps {
@@ -24,14 +24,28 @@ const ExpenseDisplay = ({
   btnLabel,
 }: ExpenseDisplayProps) => {
   const userId = localStorage.getItem(UID);
-  const { title, description, totalAmount, friendAmount, payerUID, expenseId } =
-    payment;
+  const {
+    title,
+    description,
+    totalAmount,
+    friendAmount,
+    payerUID,
+    expenseId,
+    date,
+  } = payment;
   const [showDescription, setShowDescription] = useState(false);
   const dispatch = useDispatch();
+  const expenseDate = new Date(date as number);
+
   return (
     <div className=" flex flex-col border shadow-md rounded-xl bg-froly-400 text-gray-50 mx-2 my-3 px-3 font-mono ">
       <div className="flex flex-row items-center py-2 justify-between ">
-        <div className="mr-2">{"date"}</div>
+        <div className="flex flex-col mr-2 items-center">
+          <div className="text-lg">{expenseDate.getUTCDate()}</div>
+          <div className="text-sm">
+            {months[expenseDate.getMonth()] + "," + expenseDate.getFullYear()}
+          </div>
+        </div>
         <div className="flex flex-col mr-2">
           <div className="text-lg mr-2">{title}</div>
           {description ? (
