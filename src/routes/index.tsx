@@ -47,13 +47,13 @@ const Routes = () => {
   return (
     <Switch>
       <NonProtectedRoutes
-        path={[routes.SIGN_UP, routes.HOME]}
+        path={routes.SIGN_UP}
         Component={SignUp}
         exact={true}
       />
 
       <NonProtectedRoutes
-        path={routes.SIGN_IN}
+        path={[routes.SIGN_IN, routes.HOME]}
         Component={SignIn}
         exact={true}
       />

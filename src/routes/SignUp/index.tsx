@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import FormComponent from "../../components/FormComponents";
 
-import { formType } from "../../utils/constants/appConstant";
-import { showErrorRequest } from "../../store/actions/errorsActions";
+import { formType, regExp } from "../../utils/constants/appConstant";
 import { signUpAuthRequest } from "../../store/actions/signUpAction";
 import { GlobalState } from "../../store/types";
 
@@ -14,12 +13,33 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [nameTouched, setNameTouched] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
+
   const loadSignUp = useSelector((state: GlobalState) => state.signUp.isLoader);
 
   const dispatch = useDispatch();
 
   return (
     <FormComponent
+      nameTouched={nameTouched}
+      dirtyName={() => {
+        setNameTouched(true);
+      }}
+      emailTouched={emailTouched}
+      dirtyEmail={() => {
+        setEmailTouched(true);
+      }}
+      passwordTouched={passwordTouched}
+      dirtyPassword={() => {
+        setPasswordTouched(true);
+      }}
+      confirmPasswordTouched={confirmPasswordTouched}
+      dirtyConfirmPassword={() => {
+        setConfirmPasswordTouched(true);
+      }}
       disabled={loadSignUp}
       type={formType.signUp}
       name={name}
@@ -32,20 +52,12 @@ const SignUp = () => {
       changeConfirmPassword={setConfirmPassword}
       onClick={() => {
         if (
-          !email.match(
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/
-          )
+          email.match(regExp) &&
+          password.length >= 8 &&
+          password === confirmPassword &&
+          name.length !== 0
         )
-          dispatch(showErrorRequest("please enter a valid email "));
-        else if (password.length < 6)
-          dispatch(showErrorRequest("Enter a valid password."));
-        else if (password !== confirmPassword)
-          dispatch(showErrorRequest("Passwords do not match. "));
-        else if (name.length === 0)
-          dispatch(showErrorRequest("Enter a valid user."));
-        else {
           dispatch(signUpAuthRequest(email, password, name));
-        }
       }}
     />
   );

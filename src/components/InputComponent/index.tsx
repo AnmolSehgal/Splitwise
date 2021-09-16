@@ -4,6 +4,7 @@ interface InputComponentProps {
   className?: string;
   inputVal: string;
   onChange: (val: string) => void | ((val: number) => void);
+  onBlur?: () => void;
 }
 
 const InputComponent = ({
@@ -12,9 +13,10 @@ const InputComponent = ({
   inputVal,
   className,
   onChange,
+  onBlur,
 }: InputComponentProps) => {
   return (
-    <div className={`flex flex-col min-h-24 ${className ? className : ""}`}>
+    <div className={`flex flex-col min-h-20 ${className ? className : ""}`}>
       {label ? <label className="text-gray-700 ">{label}</label> : ""}
       <div className="w-full rounded border px-2 py-1 shadow-sm bg-white">
         <input
@@ -25,6 +27,7 @@ const InputComponent = ({
           onChange={(event) => {
             onChange(event.target.value);
           }}
+          onBlur={onBlur}
         />
       </div>
     </div>

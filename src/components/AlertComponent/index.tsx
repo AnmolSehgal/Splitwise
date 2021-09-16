@@ -11,8 +11,8 @@ const AlertComponent = () => {
   const dispatch = useDispatch();
 
   return showError ? (
-    <div className="flex justify-center absolute top-4 w-full">
-      <div className="flex w-1/2 justify-between px-4 text-xl text-white items-center bg-malibu rounded-xl">
+    <div className="flex justify-center absolute top-2 w-full">
+      <div className="flex w-1/2 justify-between p-4 text-xl text-white items-center bg-malibu-600 rounded-xl">
         <div className="mr-4">{errorMessage}</div>
         <BsX
           onClick={() => {

@@ -10,17 +10,11 @@ const PrimaryButton = ({ label, onClick, className }: NavbarButtonState) => {
   return (
     <ButtonComponent
       className={
-        " border text-froly border-froly rounded-lg m-2 text-lg px-2 hover:bg-froly hover:text-white " +
+        "  text-white bg-froly rounded-md m-2 text-lg px-2 hover:bg-froly-600  " +
         (className ? className : "")
       }
       btnLabel={label}
-      onClick={
-        onClick
-          ? () => {
-              onClick();
-            }
-          : () => {}
-      }
+      onClick={onClick}
     />
   );
 };

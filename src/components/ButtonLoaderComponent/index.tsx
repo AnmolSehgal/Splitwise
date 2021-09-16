@@ -1,4 +1,5 @@
 interface ButtonLoaderComponentProps {
+  btnDisabled?: boolean;
   disabled: boolean;
   btnLabel: string;
   className?: string;
@@ -6,6 +7,7 @@ interface ButtonLoaderComponentProps {
 }
 
 const ButtonLoaderComponent = ({
+  btnDisabled,
   disabled,
   btnLabel,
   handleOnClick,
@@ -14,14 +16,17 @@ const ButtonLoaderComponent = ({
   return (
     <div
       className={`flex items-center justify-center border ${
-        disabled
-          ? "border-froly-400 bg-froly-400 text-white"
-          : "border-froly bg-white text-froly"
-      } rounded-xl px-2 py-1 font-mono hover:${
-        disabled ? "" : "bg-froly "
-      } hover:${disabled ? "" : "text-white "} ${className}`}
+        disabled || btnDisabled
+          ? " bg-froly-400 text-white"
+          : " bg-froly-500 text-white hover:bg-froly-600"
+      } rounded-lg  px-2 py-1 font-mono
+      ${className}`}
     >
-      <button className="" disabled={disabled} onClick={handleOnClick}>
+      <button
+        className=""
+        disabled={disabled || btnDisabled}
+        onClick={handleOnClick}
+      >
         {disabled ? (
           <div className="flex flex-row items-center">
             <div

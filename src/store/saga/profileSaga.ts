@@ -12,6 +12,7 @@ import {
 import history from "../history";
 import { signOutFailure, signOutSuccess } from "../actions/signOut";
 import { EMAIL, UID, USERNAME } from "../../utils/constants/appConstant";
+import { routes } from "../../utils/constants/routeConstant";
 
 function* updateProfileInfoSaga({
   payload,
@@ -31,7 +32,7 @@ function* signOutSaga(): Generator {
     localStorage.removeItem(UID);
     localStorage.removeItem(EMAIL);
     localStorage.removeItem(USERNAME);
-    history.push("/SignIn");
+    history.push(routes.SIGN_IN);
   } catch (error) {
     yield put(signOutFailure());
   }
