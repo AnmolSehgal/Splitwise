@@ -1,25 +1,22 @@
 import InputComponent from "../InputComponent";
-import { formType } from "../../utils/constants/appConstant";
+import { formType, regExp } from "../../utils/constants/appConstant";
 import signin from "../../icons/auth/signin.svg";
 import signup from "../../icons/auth/signup.svg";
 import ButtonLoaderComponent from "../ButtonLoaderComponent";
-
-interface InputComponentProps {
-  type: string;
-  name?: string;
-  changeName?: (val: string) => void;
-  email: string;
-  changeEmail: (val: string) => void;
-  password: string;
-  changePassword: (val: string) => void;
-  confirmPassword?: string;
-  changeConfirmPassword?: (val: string) => void;
-  onClick?: () => void;
-  disabled: boolean;
-}
+import { InputComponentProps } from "../../utils/types/types";
+import ErrorComponent from "./ErrorComponent";
+import { useMemo } from "react";
 
 const FormComponent = ({
   type,
+  nameTouched,
+  emailTouched,
+  passwordTouched,
+  confirmPasswordTouched,
+  dirtyName,
+  dirtyEmail,
+  dirtyPassword,
+  dirtyConfirmPassword,
   changeEmail,
   changeConfirmPassword,
   changePassword,
@@ -31,6 +28,17 @@ const FormComponent = ({
   onClick,
   disabled,
 }: InputComponentProps) => {
+  const btnDisabled = useMemo(() => {
+    if (email.match(regExp)) {
+      if (type === formType.signUp)
+        if (password.length >= 8 && name && password === confirmPassword)
+          return false;
+        else return true;
+      else return false;
+    }
+    return true;
+  }, [confirmPassword, email, name, password, type]);
+
   return (
     <div className="flex flex-row justify-center items-center my-6 ">
       <div className="flex flex-row w-2/3 justify-center">
@@ -49,51 +57,71 @@ const FormComponent = ({
         >
           <div className="flex flex-row justify-center text-3xl mb-3 border-b py-1 w-full min-h-16">
             <span className="text-gray-700">
-              {type === formType.signIn ? "SignIn" : "Sign Up"}
+              {type === formType.signIn ? "Sign In" : "Sign Up"}
             </span>
           </div>
           {type === formType.signUp && changeName ? (
-            <InputComponent
-              label="Full Name"
-              onChange={changeName}
-              inputVal={name as string}
-            />
+            <div>
+              <InputComponent
+                label="Full Name"
+                onChange={changeName}
+                inputVal={name as string}
+                onBlur={dirtyName}
+              />
+              {nameTouched && name?.length === 0 ? (
+                <ErrorComponent message="Enter a valid Name." />
+              ) : null}
+            </div>
           ) : (
             ""
           )}
           <InputComponent
             label="Email"
             onChange={changeEmail}
+            onBlur={dirtyEmail}
             inputVal={email}
           />
+          {emailTouched && !email.match(regExp) ? (
+            <ErrorComponent message="Enter a valid email." />
+          ) : null}
           <InputComponent
             label="Password"
             inputType="password"
             onChange={changePassword}
+            onBlur={dirtyPassword}
             inputVal={password}
           />
+          {type !== formType.signIn &&
+          passwordTouched &&
+          password.length < 8 ? (
+            <ErrorComponent message="Password length must me more than 8 letters." />
+          ) : null}
+
           {type === formType.signUp && changeConfirmPassword ? (
-            <InputComponent
-              label="Confirm Password"
-              inputType="password"
-              onChange={changeConfirmPassword}
-              inputVal={confirmPassword as string}
-            />
+            <div>
+              <InputComponent
+                label="Confirm Password"
+                inputType="password"
+                onChange={changeConfirmPassword}
+                onBlur={dirtyConfirmPassword}
+                inputVal={confirmPassword as string}
+              />
+              {confirmPasswordTouched &&
+              (password.length < 8 || password !== confirmPassword) ? (
+                <ErrorComponent message="Password doesn't match" />
+              ) : null}
+            </div>
           ) : (
             ""
           )}
+
           <div className="flex flex-row justify-center">
             <ButtonLoaderComponent
+              btnDisabled={btnDisabled}
               disabled={disabled}
               btnLabel="Submit"
-              className=" border text-froly border-froly rounded-xl m-2 text-lg px-2 hover:bg-froly hover:text-white my-3 w-32 h-10 "
-              handleOnClick={
-                onClick
-                  ? () => {
-                      onClick();
-                    }
-                  : () => {}
-              }
+              className=" m-2 text-lg px-2 my-3 w-32 h-10 "
+              handleOnClick={onClick!}
             />
           </div>
         </form>

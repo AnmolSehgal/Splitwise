@@ -3,7 +3,7 @@ import { signUpAuth } from "../../services/firebase/auth";
 import { EMAIL, UID, USERNAME } from "../../utils/constants/appConstant";
 import { routes } from "../../utils/constants/routeConstant";
 import { showErrorRequest } from "../actions/errorsActions";
-import {} from "../actions/signInAction";
+import { signInAuthSuccess } from "../actions/signInAction";
 import {
   signUpAuthFailure,
   signUpAuthRequest,
@@ -23,7 +23,7 @@ function* signUpAuthSaga({
         localStorage.setItem(EMAIL, data.email as string);
       }
     );
-    yield put(signUpAuthSuccess());
+    yield put(signInAuthSuccess());
     yield put(signUpAuthSuccess());
     history.push(routes.DASHBOARD);
   } catch (error: any) {
