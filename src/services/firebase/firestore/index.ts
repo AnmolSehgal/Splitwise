@@ -246,38 +246,6 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
       date: data.date,
     };
   });
-
-  userData.friends[fIndex].paymentDetails = userData.friends[
-    index
-  ].paymentDetails.map((data) => {
-    return {
-      expenseId: data.expenseId,
-      title: data.title,
-      description: data.description,
-      payerUID: data.payerUID,
-      payerAmount: data.payerAmount,
-      friendAmount: data.friendAmount,
-      totalAmount: data.totalAmount,
-      settleStatus: true,
-      date: data.date,
-    };
-  });
-
-  userData.friends[index].paymentDetails = userData.friends[
-    index
-  ].paymentDetails.map((data) => {
-    return {
-      expenseId: data.expenseId,
-      title: data.title,
-      description: data.description,
-      payerUID: data.payerUID,
-      payerAmount: data.payerAmount,
-      friendAmount: data.friendAmount,
-      totalAmount: data.totalAmount,
-      settleStatus: true,
-      date: data.date,
-    };
-  });
   friendData.friends[fIndex].paymentDetails = friendData.friends[
     fIndex
   ].paymentDetails.map((data) => {
