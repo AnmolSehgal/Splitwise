@@ -6,7 +6,7 @@ import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
 } from "../actions/profileActions";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { ProfileStateObject } from "../types";
 
 const initState: ProfileStateObject = {

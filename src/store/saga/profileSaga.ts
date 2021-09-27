@@ -1,6 +1,6 @@
 import { takeLatest, put } from "@redux-saga/core/effects";
 
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import { ProfileStateObject } from "../types";
 import { userSignOut } from "../../services/firebase/auth";
 
@@ -9,8 +9,10 @@ import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
 } from "../actions/profileActions";
-import history from "../history/history";
+import history from "../history";
 import { signOutFailure, signOutSuccess } from "../actions/signOut";
+import { EMAIL, UID, USERNAME } from "../../utils/constants/appConstant";
+import { routes } from "../../utils/constants/routeConstant";
 
 function* updateProfileInfoSaga({
   payload,
@@ -27,10 +29,10 @@ function* signOutSaga(): Generator {
   try {
     yield userSignOut();
     yield put(signOutSuccess());
-    localStorage.removeItem("uid");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userName");
-    history.push("/SignIn");
+    localStorage.removeItem(UID);
+    localStorage.removeItem(EMAIL);
+    localStorage.removeItem(USERNAME);
+    history.push(routes.SIGN_IN);
   } catch (error) {
     yield put(signOutFailure());
   }

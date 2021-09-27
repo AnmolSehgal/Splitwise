@@ -10,8 +10,6 @@ import App from "./App";
 import firebaseConfig from "./services/firebase/firebaseConfig";
 import store from "./store/store";
 
-console.log(process.env);
-
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 

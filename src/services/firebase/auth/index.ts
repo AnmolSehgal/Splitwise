@@ -1,14 +1,13 @@
 import firebase from "firebase";
 import "firebase/auth";
 import { ProfileObject } from "../../../store/types";
-import { settingUpUser } from "../firestore/firestore";
-import { uploadImage } from "../storage/storage";
+import { settingUpUser } from "../firestore";
+import { uploadImage } from "../storage";
 
 export const signInAuth = async (email: string, password: string) => {
   const data = await firebase
     .auth()
     .signInWithEmailAndPassword(email, password);
-  console.log(data.user?.uid, data.user?.email, data.user?.displayName);
   return {
     uid: data.user?.uid,
     userName: data.user?.displayName,
@@ -21,13 +20,15 @@ export const signUpAuth = async (
   password: string,
   fullName: string
 ) => {
+  if (!fullName) throw new Error("Please enter user name");
+  if (!email) throw new Error("Please enter user email");
   const userLogin = await firebase
     .auth()
     .createUserWithEmailAndPassword(email, password);
   const user = await firebase.auth().currentUser;
   await user?.updateProfile({ displayName: fullName });
-  await firebase.auth().currentUser?.displayName;
-  await settingUpUser(email, fullName);
+  const uid = userLogin.user?.uid;
+  await settingUpUser(uid as string, email, fullName);
   return {
     uid: userLogin.user?.uid,
     userName: fullName,
@@ -58,7 +59,6 @@ export const updateProfile = async ({
   }
   let data = {};
   if (user !== null) {
-    console.log(user.displayName);
     data = {
       image: user.photoURL,
       name: user.displayName,

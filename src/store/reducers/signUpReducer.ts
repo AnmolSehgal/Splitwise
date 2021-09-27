@@ -1,5 +1,5 @@
 import { SignUpState } from "../types";
-import actionTypes from "../actionTypes/actionTypes";
+import actionTypes from "../actionTypes";
 import {
   signUpAuthFailure,
   signUpAuthRequest,
@@ -7,7 +7,7 @@ import {
 } from "../actions/signUpAction";
 
 const initState: SignUpState = {
-  signUpFailed: false,
+  isLoader: false,
 };
 const signUpReducer = (
   state = initState,
@@ -18,11 +18,11 @@ const signUpReducer = (
 ) => {
   switch (action.type) {
     case actionTypes.SIGN_UP_AUTH_REQUEST:
-      return { ...state, signUpFailed: false };
+      return { ...state, isLoader: true };
     case actionTypes.SIGN_UP_AUTH_SUCCESS:
-      return { ...state, signUpFailed: false };
+      return { ...state, isLoader: false };
     case actionTypes.SIGN_UP_AUTH_FAILURE:
-      return { ...state, signUpFailed: true };
+      return { ...state, isLoader: false };
     default:
       return { ...state };
   }

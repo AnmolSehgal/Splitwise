@@ -1,14 +1,18 @@
 import { FriendState } from "./reducers/friendsReducer";
 
 export interface LoginState {
-  loginFailed: boolean;
+  loading: boolean;
   isLoggedIn: boolean;
 }
 
 export interface SignUpState {
-  signUpFailed: boolean;
+  isLoader: boolean;
 }
 
+export interface ErrorState {
+  showError: boolean;
+  errorMessage: string;
+}
 export interface ProfileObject {
   name?: string;
   image?: File | undefined;
@@ -30,6 +34,8 @@ export interface GlobalState {
   signUp: SignUpState;
   profile: ProfileStateObject;
   friends: FriendState;
+  loader: LoaderState;
+  error: ErrorState;
 }
 
 export interface ExpenseInfo {
@@ -37,17 +43,15 @@ export interface ExpenseInfo {
   expenseId: string;
   title: string;
   description: string;
-  friend: string;
-  friendUid?: string;
-  paidBy: string;
-  userAmount: number;
+  payerUID: string;
+  payerAmount: number;
   totalAmount: number;
   friendAmount: number;
-  date: Date;
-  settleDate: Date | undefined;
+  date: Number;
 }
 
 export interface UserData {
+  uid: string;
   userName: string;
   email: string;
   friends: Friend[];
@@ -55,6 +59,25 @@ export interface UserData {
 
 export interface Friend {
   userName: string;
-  email: string | null;
-  relationId: string;
+  isVerified: boolean;
+  paymentDetails: ExpenseInfo[];
+  friendUID: string;
+}
+
+export interface AddExpenseInterface {
+  friendUID: string;
+  payerUID: string;
+  userUID: string;
+  expenseId: string;
+  title: string;
+  description: string;
+  payerAmount: number;
+  totalAmount: number;
+  friendAmount: number;
+  settleStatus: boolean;
+  date: Number;
+}
+export interface LoaderState {
+  isLoader: boolean;
+  friendListLoader: boolean;
 }
