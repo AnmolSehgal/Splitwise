@@ -71,7 +71,6 @@ const ExpenseDisplay = ({
             btnLabel={btnLabel}
             className=" bg-froly-400 border border-gray-50 p-1 rounded-lg  hover:bg-gray-50 hover:border-froly-400 hover:text-froly-400"
             onClick={() => {
-              console.log(isVerified + "---- verified user");
               isVerified
                 ? dispatch(
                     settleExpenseRequest(expenseId, userId as string, friendUID)
