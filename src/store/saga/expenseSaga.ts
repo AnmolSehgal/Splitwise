@@ -34,6 +34,7 @@ function* addExpenseSaga({ payload }: ReturnType<typeof addExpenseRequest>) {
     yield addExpense(payload);
     yield put(addExpenseSuccess(payload));
   } catch (error) {
+    console.log(error);
     yield put(addExpenseFailure());
   }
 }

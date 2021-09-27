@@ -116,10 +116,9 @@ export async function addExpense({
   const fIndex = friendData.friends.findIndex((friend) => {
     return userUID === friend.friendUID;
   });
-
   if (index >= 0 && fIndex >= 0) {
     userData.friends[index].paymentDetails.push(obj);
-    friendData.friends[index].paymentDetails.push(obj);
+    friendData.friends[fIndex].paymentDetails.push(obj);
     await db.doc(userUID).update({ friends: userData.friends });
     await db.doc(friendUID).update({ friends: friendData.friends });
   }
@@ -181,7 +180,7 @@ export async function settleExpense(
       (val) => val.expenseId === expenseId
     );
     const friendPaymentIndex = friendData.friends[
-      index
+      fIndex
     ].paymentDetails.findIndex((val) => val.expenseId === expenseId);
     if (userPaymentIndex >= 0 && friendPaymentIndex >= 0) {
       userData.friends[index].paymentDetails[userPaymentIndex].settleStatus =
@@ -248,7 +247,7 @@ export async function settleAllExpense(userUID: string, friendUID: string) {
     };
   });
 
-  userData.friends[index].paymentDetails = userData.friends[
+  userData.friends[fIndex].paymentDetails = userData.friends[
     index
   ].paymentDetails.map((data) => {
     return {
